@@ -32,6 +32,9 @@ body.wb-app-navigation-enabled #pageContent .wb-page-header > h1 {
   grid-column: 1;
   min-width: 0;
 }
+body.wb-app-navigation-enabled #pageContent [data-workbench-page-focus='true'] { scroll-margin-block-start: 82px; }
+body.wb-app-navigation-enabled #pageContent h1[data-workbench-page-focus='true']:focus { outline: none; }
+body.wb-app-navigation-enabled #pageContent h1[data-workbench-page-focus='true']:focus-visible { border-radius: 5px; outline: 2px solid color-mix(in srgb, var(--wb-action) 58%, transparent); outline-offset: 5px; }
 
 body.wb-app-navigation-enabled #pageContent .wb-page-header__eyebrow {
   margin: 0;

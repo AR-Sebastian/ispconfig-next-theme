@@ -94,6 +94,38 @@
     return document.activeElement === trigger;
   }
 
+  function dialogIsOpen() {
+    return Boolean(document.querySelector('.wb-dialog:not([hidden]):not([aria-hidden="true"]), .modal.in[role="dialog"], .modal.show[role="dialog"]'));
+  }
+
+  function focusPageTarget(target) {
+    if (!target || !target.isConnected || dialogIsOpen() || document.visibilityState === 'hidden') return false;
+    var temporaryTabindex = !target.hasAttribute('tabindex');
+    if (temporaryTabindex) target.setAttribute('tabindex', '-1');
+    target.setAttribute('data-workbench-page-focus', 'true');
+    try { target.focus({ preventScroll: true }); }
+    catch (error) { target.focus(); }
+    if (typeof target.scrollIntoView === 'function') {
+      target.scrollIntoView({ block: 'start', inline: 'nearest', behavior: 'auto' });
+    }
+    target.addEventListener('blur', function cleanup() {
+      if (temporaryTabindex) target.removeAttribute('tabindex');
+      target.removeAttribute('data-workbench-page-focus');
+    }, { once: true });
+    return document.activeElement === target;
+  }
+
+  function focusLoadedPage(root, context) {
+    if (!root || !context || context.source !== 'navigation') return false;
+    var heading = root.querySelector(':scope > .wb-page-header h1, :scope > .page-header h1, :scope > h1');
+    return focusPageTarget(heading || root);
+  }
+
+  function focusNavigationError(root) {
+    if (!root) return false;
+    return focusPageTarget(root.querySelector('.wb-content-state--error .wb-content-state__retry, .wb-content-state--error'));
+  }
+
   function enhanceDialog(dialog) {
     if (!dialog.hasAttribute('tabindex')) dialog.setAttribute('tabindex', '-1');
     if (!dialog.hasAttribute('aria-modal')) dialog.setAttribute('aria-modal', 'true');
@@ -145,9 +177,19 @@
     host.querySelectorAll('.modal[role="dialog"]').forEach(enhanceDialog);
   }
 
-  document.addEventListener('workbench:navigation-complete', function () {
-    enhance(document.querySelector('#pageContent'));
+  document.addEventListener('workbench:navigation-complete', function (event) {
+    var root = document.querySelector('#pageContent');
+    enhance(root);
+    if (event.detail && event.detail.error) {
+      window.requestAnimationFrame(function() { focusNavigationError(root); });
+    }
     window.setTimeout(function () { enhance(document.querySelector('#pageContent')); }, 100);
+  });
+
+  document.addEventListener('workbench:content-ready', function(event) {
+    var detail = event.detail || {};
+    var root = detail.root && detail.root.querySelectorAll ? detail.root : document.querySelector('#pageContent');
+    window.requestAnimationFrame(function() { focusLoadedPage(root, detail.context || null); });
   });
 
   if (document.readyState === 'loading') {
@@ -156,6 +198,12 @@
     enhance(document);
   }
 
-  window.workbenchAccessibility = { enhance: enhance, focusDialog: focusDialog, restoreDialogFocus: restoreDialogFocus };
+  window.workbenchAccessibility = {
+    enhance: enhance,
+    focusDialog: focusDialog,
+    restoreDialogFocus: restoreDialogFocus,
+    focusLoadedPage: focusLoadedPage,
+    focusNavigationError: focusNavigationError
+  };
   window.workbenchAccessibilityInstalled = true;
 }());

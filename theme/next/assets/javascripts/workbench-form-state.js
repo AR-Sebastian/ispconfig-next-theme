@@ -2,7 +2,7 @@
   'use strict';
 
   var messages = {};
-  var isGerman = (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0;
+  var isGerman = (typeof window.workbenchLanguage === 'function' ? window.workbenchLanguage() : (document.documentElement.lang || '')).toLowerCase().indexOf('de') === 0;
 
   function localized(german, english) {
     return isGerman ? german : english;

@@ -3,7 +3,7 @@
   "short_name": "Workbench",
   "icons": [
     {
-      "src": "/themes/workbench/assets/images/ispconfig-workbench-favicon.svg",
+      "src": "/themes/next/assets/images/ispconfig-workbench-favicon.svg",
       "sizes": "64x64",
       "type": "image/svg+xml"
     }

@@ -106,7 +106,8 @@
   };
 
   function language() {
-    return String(document.documentElement.lang || 'en').toLowerCase().indexOf('de') === 0 ? 'de' : 'en';
+    var active = typeof window.workbenchLanguage === 'function' ? window.workbenchLanguage() : String(document.documentElement.lang || 'en');
+    return String(active).toLowerCase().indexOf('de') === 0 ? 'de' : 'en';
   }
 
   function t(key, values) {

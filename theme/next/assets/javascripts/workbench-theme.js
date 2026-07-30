@@ -114,7 +114,10 @@
     root.setAttribute('data-wb-theme', dark ? 'dark' : 'light');
     applyAccessibleAction(cssToken('--wb-accent', '#cc151c'));
     Array.prototype.forEach.call(document.querySelectorAll('.wb-theme-toggle'), function (button) {
-      button.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+      var german = typeof window.workbenchLanguage === 'function' && window.workbenchLanguage() === 'de';
+      button.setAttribute('aria-label', dark
+        ? (german ? 'Zum hellen Design wechseln' : 'Switch to light theme')
+        : (german ? 'Zum dunklen Design wechseln' : 'Switch to dark theme'));
       setIcon(button, dark ? sun : moon);
     });
     scheduleChartTheme();

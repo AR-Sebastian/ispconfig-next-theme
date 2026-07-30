@@ -2,7 +2,7 @@
 
 NEXT is a responsive light and dark interface theme for ISPConfig. It focuses on clear navigation, compact data tables, accessible forms, consistent feedback and a polished desktop and mobile experience.
 
-![NEXT dashboard in light mode](docs/images/dashboard-light.png)
+Current runtime screenshots will be added after the published package has completed the full Apache and Nginx validation matrix.
 
 ## Why NEXT was created
 

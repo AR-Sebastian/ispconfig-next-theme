@@ -24,6 +24,20 @@
     return isGermanInterface() ? de : en;
   }
 
+  function formatResultSummary(count, query) {
+    if (isGermanInterface()) {
+      return count + ' Treffer für "' + query + '"';
+    }
+    return count + (count === 1 ? ' result for "' : ' results for "') + query + '"';
+  }
+
+  function formatFoundSummary(count) {
+    if (isGermanInterface()) {
+      return count + ' Treffer gefunden.';
+    }
+    return count + (count === 1 ? ' result found.' : ' results found.');
+  }
+
   function escapeRegExp(value) {
     return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }
@@ -45,7 +59,7 @@
     resultBox.id = 'workbench-global-search-results';
     resultBox.className = 'wb-global-search-results';
     resultBox.setAttribute('role', 'listbox');
-    resultBox.setAttribute('aria-label', input.getAttribute('aria-label') || 'Search results');
+    resultBox.setAttribute('aria-label', input.getAttribute('aria-label') || tr('Suchergebnisse', 'Search results'));
     resultBox.hidden = true;
     form.appendChild(resultBox);
     input.setAttribute('aria-controls', resultBox.id);
@@ -54,6 +68,7 @@
     status.className = 'wb-visually-hidden';
     status.setAttribute('role', 'status');
     status.setAttribute('aria-live', 'polite');
+    status.setAttribute('aria-atomic', 'true');
     form.appendChild(status);
 
     var clear = form.querySelector('.wb-search-clear');
@@ -61,13 +76,20 @@
       clear = document.createElement('button');
       clear.type = 'button';
       clear.className = 'wb-search-clear';
-      clear.setAttribute('aria-label', document.body.getAttribute('data-workbench-search-clear') || 'Clear search');
+      clear.setAttribute('aria-label', document.body.getAttribute('data-workbench-search-clear') || tr('Suche leeren', 'Clear search'));
       clear.textContent = '\u00d7';
       input.parentNode.appendChild(clear);
     }
     clear.hidden = true;
 
     var shortcut = form.querySelector('.wb-search-shortcut');
+
+    function announce(message) {
+      status.textContent = '';
+      window.requestAnimationFrame(function () {
+        status.textContent = message;
+      });
+    }
 
     function options() {
       return Array.prototype.slice.call(resultBox.querySelectorAll('[role="option"]'));
@@ -163,9 +185,9 @@
 
       var summary = document.createElement('strong');
       if (query) {
-        summary.textContent = String(count) + tr(' Treffer fuer "', ' results for "') + query + '"';
+        summary.textContent = formatResultSummary(Number(count) || 0, query);
       } else {
-        summary.textContent = tr('Suche in Menue und Objekten', 'Search quickly in menus and objects');
+        summary.textContent = tr('Suche in Menüs und Objekten', 'Search quickly in menus and objects');
       }
 
       header.appendChild(eyebrow);
@@ -176,7 +198,7 @@
     function appendFooter() {
       var footer = document.createElement('div');
       footer.className = 'wb-global-search-palette__footer';
-      footer.textContent = tr('Cursor hoch/runter navigieren, Enter oeffnet, Esc schliesst.', 'Use up/down, Enter opens, Esc closes.');
+      footer.textContent = tr('Mit Pfeil hoch/runter navigieren, Enter öffnet, Esc schließt.', 'Use up/down, Enter opens, Esc closes.');
       resultBox.appendChild(footer);
     }
 
@@ -192,7 +214,7 @@
 
       appendFooter();
       openResults();
-      status.textContent = message;
+      announce(message);
     }
 
     function showPrompt() {
@@ -210,7 +232,7 @@
 
       appendFooter();
       openResults();
-      status.textContent = row.textContent;
+      announce(row.textContent);
     }
 
     function render(data) {
@@ -227,12 +249,14 @@
 
         var group = document.createElement('section');
         group.className = 'wb-global-search-group';
+        group.setAttribute('role', 'group');
 
         var header = document.createElement('div');
         header.className = 'wb-global-search-group__header';
 
         var title = document.createElement('strong');
-        title.textContent = (category.cheader && category.cheader.title) || 'Results';
+        title.textContent = (category.cheader && category.cheader.title) || tr('Ergebnisse', 'Results');
+        group.setAttribute('aria-label', title.textContent);
 
         var total = category.cheader && typeof category.cheader.total === 'number'
           ? category.cheader.total
@@ -240,6 +264,7 @@
 
         var countBadge = document.createElement('span');
         countBadge.textContent = String(total);
+        header.setAttribute('aria-hidden', 'true');
 
         header.appendChild(title);
         header.appendChild(countBadge);
@@ -311,7 +336,7 @@
 
       var resultSummary = resultBox.querySelector('.wb-global-search-palette__header strong');
       if (resultSummary) {
-        resultSummary.textContent = count + tr(' Treffer fuer "', ' results for "') + query + '"';
+        resultSummary.textContent = formatResultSummary(count, query);
       }
 
       if (!count) {
@@ -322,7 +347,7 @@
       appendFooter();
       openResults();
       setActive(0);
-      status.textContent = count + tr(' Treffer gefunden.', ' results found.');
+      announce(formatFoundSummary(count));
     }
 
     function search() {
@@ -349,11 +374,11 @@
       }
 
       input.setAttribute('aria-busy', 'true');
-      showMessage(tr('Suche laeuft...', 'Searching...'), 'loading', query);
+      showMessage(tr('Suche läuft …', 'Searching…'), 'loading', query);
 
       var runtime = app();
       if (!runtime || typeof runtime.requestJson !== 'function' || typeof runtime.endpoint !== 'function') {
-        showMessage(tr('Die Suche ist derzeit nicht verfuegbar.', 'Search is temporarily unavailable.'), 'error', query);
+        showMessage(tr('Die Suche ist derzeit nicht verfügbar.', 'Search is temporarily unavailable.'), 'error', query);
         input.removeAttribute('aria-busy');
         return;
       }
@@ -378,7 +403,7 @@
         if (token !== requestSequence) {
           return;
         }
-        showMessage(tr('Die Suche ist derzeit nicht verfuegbar.', 'Search is temporarily unavailable.'), 'error', query);
+        showMessage(tr('Die Suche ist derzeit nicht verfügbar.', 'Search is temporarily unavailable.'), 'error', query);
       }).finally(function () {
         if (token === requestSequence) {
           input.removeAttribute('aria-busy');
@@ -386,7 +411,7 @@
       });
     }
 
-    function syncClear() {
+    function syncClear(scheduleSearch) {
       var hasValue = Boolean(input.value);
       clear.hidden = !hasValue;
       form.classList.toggle('wb-global-search-has-value', hasValue);
@@ -397,10 +422,12 @@
       clear.disabled = !hasValue;
 
       window.clearTimeout(timer);
-      timer = window.setTimeout(search, 250);
+      if (scheduleSearch !== false) {
+        timer = window.setTimeout(search, 250);
+      }
     }
 
-    input.addEventListener('input', syncClear);
+    input.addEventListener('input', function () { syncClear(true); });
     input.addEventListener('focus', function () {
       if (!input.value.trim()) {
         showPrompt();
@@ -428,11 +455,15 @@
         }
       } else if (event.key === 'Escape') {
         event.preventDefault();
+        window.clearTimeout(timer);
+        if (request && typeof request.abort === 'function') {
+          request.abort();
+        }
         if (resultBox.hidden) {
           input.value = '';
         }
         closeResults();
-        syncClear();
+        syncClear(false);
       }
     });
 
@@ -445,9 +476,14 @@
     });
 
     clear.addEventListener('click', function () {
+      window.clearTimeout(timer);
+      if (request && typeof request.abort === 'function') {
+        request.abort();
+      }
       input.value = '';
       input.focus();
-      syncClear();
+      syncClear(false);
+      showPrompt();
     });
 
     document.addEventListener('keydown', function (event) {
@@ -471,7 +507,13 @@
       }
     });
 
-    syncClear();
+    document.addEventListener('focusin', function (event) {
+      if (!form.contains(event.target)) {
+        closeResults();
+      }
+    });
+
+    syncClear(false);
     return true;
   }
 

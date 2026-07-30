@@ -23,8 +23,8 @@ Die Installation zunächst auf einem Testsystem durchführen.
 
    ```bash
    sudo chown -R ispconfig:ispconfig /usr/local/ispconfig/interface/web/themes/next
-   sudo find /usr/local/ispconfig/interface/web/themes/next -type d -exec chmod 755 {} \;
-   sudo find /usr/local/ispconfig/interface/web/themes/next -type f -exec chmod 644 {} \;
+   sudo find /usr/local/ispconfig/interface/web/themes/next -type d -exec chmod 750 {} \;
+   sudo find /usr/local/ispconfig/interface/web/themes/next -type f -exec chmod 640 {} \;
    ```
 
 5. In ISPConfig unter **Einstellungen → Benutzereinstellungen → Design** das Theme **NEXT** auswählen.
@@ -33,4 +33,3 @@ Die Installation zunächst auf einem Testsystem durchführen.
 ## Aktualisierung und Rückkehr
 
 Vor einer Aktualisierung den vorhandenen Ordner sichern. Für die Rückkehr zuerst das ISPConfig-Standardtheme auswählen und danach `themes/next` entfernen.
-

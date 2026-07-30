@@ -23,12 +23,11 @@ Install and verify the theme on a staging system first.
 
    ```bash
    sudo chown -R ispconfig:ispconfig /usr/local/ispconfig/interface/web/themes/next
-   sudo find /usr/local/ispconfig/interface/web/themes/next -type d -exec chmod 755 {} \;
-   sudo find /usr/local/ispconfig/interface/web/themes/next -type f -exec chmod 644 {} \;
+   sudo find /usr/local/ispconfig/interface/web/themes/next -type d -exec chmod 750 {} \;
+   sudo find /usr/local/ispconfig/interface/web/themes/next -type f -exec chmod 640 {} \;
    ```
 
 5. Select **NEXT** in **System → User Settings → Design**.
 6. Clear the browser cache and sign in again.
 
 Back up the existing directory before updating. To roll back, select the ISPConfig default theme first and then remove `themes/next`.
-

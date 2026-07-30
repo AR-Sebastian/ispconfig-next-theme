@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.3 - release candidate
+## 1.1.3 - 2026-07-30
 
 - Added an explicit ISPConfig 3.3.1p1 compatibility candidate.
 - Verified real NEXT selection without fallback on a clean stable installation.

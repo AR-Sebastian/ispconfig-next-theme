@@ -763,10 +763,28 @@
     return item;
   }
 
+  function decorateDashboardTableLabels(table) {
+    if (!table || table.dataset.wbDashboardLabels === 'true') return;
+    var headings = Array.prototype.map.call(table.querySelectorAll('thead th'), function (cell) {
+      return cell.textContent.replace(/\s+/g, ' ').trim();
+    });
+    Array.prototype.forEach.call(table.querySelectorAll('tbody > tr'), function (row) {
+      var cells = Array.prototype.slice.call(row.cells || []);
+      var rowLabel = cells[0] ? cells[0].textContent.replace(/\s+/g, ' ').trim() : '';
+      cells.forEach(function (cell, index) {
+        if ((cell.getAttribute('data-wb-label') || '').trim()) return;
+        var label = headings[index] || (index === 0 ? t('accountLimit') : rowLabel);
+        if (label) cell.setAttribute('data-wb-label', label);
+      });
+    });
+    table.dataset.wbDashboardLabels = 'true';
+  }
+
   function decorateLimits(node) {
     if (node.dataset.wbLimitsDecorated === 'true') return;
     var table = node.querySelector('table');
     if (!table) return;
+    decorateDashboardTableLabels(table);
     var rows = table.querySelectorAll('tbody > tr');
     var warning = table.querySelectorAll('.progress-bar-warning').length;
     var critical = table.querySelectorAll('.progress-bar-danger').length;
@@ -853,6 +871,7 @@
     var wrapper = node.querySelector('.table-wrapper');
     var table = wrapper && wrapper.querySelector('table');
     if (!table) return;
+    decorateDashboardTableLabels(table);
     var rows = Array.prototype.slice.call(table.querySelectorAll('tbody > tr'));
     var alertRows = rows.filter(function (row) { return row.querySelector('.progress-bar-warning, .progress-bar-danger'); });
     var footerValues = Array.prototype.map.call(table.querySelectorAll('tfoot th'), function (cell) { return cell.textContent.replace(/\s+/g, ' ').trim(); }).filter(Boolean);

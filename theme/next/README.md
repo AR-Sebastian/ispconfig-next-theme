@@ -1,4 +1,4 @@
-# ISPConfig NEXT Theme 1.2.2
+# ISPConfig NEXT Theme 1.2.3
 
 NEXT is the calm, responsive premium theme for ISPConfig. It
 modernizes the visible interface without replacing ISPConfig permissions,
@@ -7,7 +7,7 @@ routes, remote API behavior or server-side provisioning.
 ## Compatibility
 
 - ISPConfig baseline: `3.3.1p1`
-- Validated laboratory platforms: Ubuntu 22.04/24.04 and Debian 12/13, Apache and Nginx
+- Validated platforms: Ubuntu 22.04/24.04 and Debian 12/13 with Apache and Nginx
 - Release directory: `next`
 - Required fallback: the ISPConfig `default` theme remains installed
 

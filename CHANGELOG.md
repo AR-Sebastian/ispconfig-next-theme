@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+## 1.2.3 - 2026-07-30
+
+- Added authoritative mobile labels to dashboard quota and account-limit tables.
+- Documented optional system-wide activation for the public sign-in page.
+- Clarified the theme-only boundary for retired ISPConfig integrations.
+- Classified Billing as an optional supported extension.
+- Replaced release imagery with captures from the standalone theme on ISPConfig 3.3.1p1.
+- Removed remaining laboratory wording from public package metadata.
+
 ## 1.2.2 - 2026-07-30
 
 - Removed private Workbench and laboratory wording from the public product.

@@ -2,15 +2,15 @@
     "schemaVersion":  1,
     "id":  "com.ispconfig.next.theme",
     "name":  "ISPConfig NEXT",
-    "version":  "1.2.2",
+    "version":  "1.2.3",
     "stage":  "stable",
     "releaseDate":  "2026-07-30",
     "compatibility":  {
                           "ispconfig":  "3.3.1p1",
-                          "preview":  "Ubuntu 22.04/24.04 and Debian 12/13, Apache and Nginx laboratories"
+                          "preview":  "Ubuntu 22.04/24.04 and Debian 12/13 with Apache and Nginx"
                       },
     "packageDirectory":  "next",
-    "releaseTag":  "v1.2.2",
+    "releaseTag":  "v1.2.3",
     "supportedModules":  [
                              "login",
                              "dashboard",
@@ -24,6 +24,9 @@
                              "tools",
                              "admin"
                          ],
+    "optionalSupportedModules":  [
+                                      "billing"
+                                  ],
     "retiredThemeSurfaces":  [
                                  "openvz",
                                  "aps-installer",

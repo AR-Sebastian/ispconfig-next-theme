@@ -4,7 +4,7 @@
 
 | Component | Supported baseline |
 |---|---|
-| ISPConfig | 3.3.1p1 for the `v1.2.2` stable release |
+| ISPConfig | 3.3.1p1 for the `v1.2.3` stable release |
 | PHP | 8.1 and newer |
 | Web server | Apache or Nginx as configured by ISPConfig |
 | Desktop browsers | Current Chrome, Edge, Firefox and Safari |
@@ -14,11 +14,11 @@
 
 ### Retired ISPConfig integrations
 
-NEXT does not design or validate XMPP, OpenVZ, APS Installer or Mailman 2
-surfaces. These historical ISPConfig integrations are outside the supported
-feature set targeted by this theme. Legacy links emitted by older shared
-interface code are suppressed by the theme and are not presented as supported
-product functionality.
+NEXT ships no XMPP, OpenVZ, APS Installer or Mailman 2 templates, forms,
+translations, icons or feature behavior. These historical integrations are
+outside the supported feature set. Defensive navigation boundaries only prevent
+historical links emitted by the unchanged ISPConfig core from reappearing; they
+do not reimplement or expose those integrations.
 
 Each release is checked for:
 
@@ -36,7 +36,7 @@ Server provisioning remains controlled by ISPConfig. The theme does not replace 
 
 ## Stable 3.3.1p1 release gate
 
-The `v1.2.2` stable release names ISPConfig `3.3.1p1` so it can be tested
+The `v1.2.3` stable release names ISPConfig `3.3.1p1` so it can be tested
 without ISPConfig falling back to the default theme. It has passed clean
 Ubuntu 22.04, Ubuntu 24.04, Debian 12 and Debian 13 installations with
 Apache and Nginx,
@@ -50,6 +50,5 @@ referenced assets were checked for every role.
 
 The visual browser, responsive and screenshot matrix has also passed for login,
 dashboard, tables, expanded filters, forms and mobile navigation in light and
-dark presentation. The stable release is ready for the immutable tag workflow; the
-tagged archives and checksums must still be downloaded and verified before the
-GitHub release is declared complete.
+dark presentation. ZIP and TAR.GZ release archives are generated from the
+immutable tag and verified against the published SHA-256 checksums.

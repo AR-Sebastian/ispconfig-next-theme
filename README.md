@@ -7,17 +7,17 @@ Navigation, Tabellen, Filter, Formulare, Rückmeldungen und responsive Ansichten
 ohne die bewährten Berechtigungen, Routen oder Serveraktionen von ISPConfig zu
 ersetzen.
 
-![NEXT-Dashboard der installierten Version 1.2.2](docs/images/dashboard-runtime-v1.2.2.png)
+![NEXT-Dashboard der installierten Version 1.2.3](docs/images/dashboard-runtime-v1.2.3.png)
 
 Die Abbildung ist eine echte Laufzeitaufnahme der installierten
-stabilen Version `v1.2.2` auf ISPConfig 3.3.1p1. Sie ist kein Konzept-Rendering.
+stabilen Version `v1.2.3` auf ISPConfig 3.3.1p1. Sie ist kein Konzept-Rendering.
 
 Weitere echte Laufzeitaufnahmen:
 
-- [Login](docs/images/login-runtime-v1.2.2.png)
-- [Tabellenansicht](docs/images/table-runtime-v1.2.2.png)
-- [Formular](docs/images/form-runtime-v1.2.2.png)
-- [Mobile Navigation](docs/images/mobile-navigation-runtime-v1.2.2.png)
+- [Login](docs/images/login-runtime-v1.2.3.png)
+- [Tabellenansicht](docs/images/table-runtime-v1.2.3.png)
+- [Formular](docs/images/form-runtime-v1.2.3.png)
+- [Mobile Navigation](docs/images/mobile-navigation-runtime-v1.2.3.png)
 
 ### Warum NEXT entstanden ist
 
@@ -45,7 +45,7 @@ Desktop, Tablet und Smartphone.
 
 ### Aktueller Status und Kompatibilität
 
-`v1.2.2` ist die aktuelle stabile Wartungsversion:
+`v1.2.3` ist die aktuelle stabile Wartungsversion:
 
 - ISPConfig 3.3.1p1
 - PHP 8.1 oder neuer
@@ -54,16 +54,16 @@ Desktop, Tablet und Smartphone.
 
 Die vollständige Laufzeitmatrix, Admin-, Reseller-, Kunden- und
 Mailuser-Ansichten sowie die visuellen Desktop-, Tablet- und Mobilprüfungen
-sind bestanden. Version 1.2.2 entfernt interne Laborbezeichnungen und
-vervollständigt die deutsche und englische Laufzeit-Lokalisierung. Der
-unveränderliche Tag `v1.2.2` bezeichnet genau diesen geprüften Quellstand;
-`v1.2.1` bleibt unverändert erhalten.
+sind bestanden. Version 1.2.3 ergänzt vollständige mobile Dashboard-Labels,
+bereinigt die öffentlichen Paketmetadaten und dokumentiert die optionale
+systemweite Anmeldeseite. Der unveränderliche Tag `v1.2.3` bezeichnet genau
+diesen geprüften Quellstand; ältere Tags bleiben unverändert erhalten.
 
 ### Installation und Projektinformationen
 
 - [Installation auf Deutsch](docs/INSTALLATION-DE.md)
 - [Kompatibilität und Prüfbereich](docs/COMPATIBILITY.md)
-- [Freigabekriterien für Version 1.2.2](docs/RELEASE-GATE-1.2.2.md)
+- [Freigabekriterien für Version 1.2.3](docs/RELEASE-GATE-1.2.3.md)
 - [Branding-Anleitung](docs/BRANDING-DE.md)
 - [Änderungsprotokoll](CHANGELOG.md)
 - [Sicherheitsrichtlinie](SECURITY.md)
@@ -96,17 +96,17 @@ NEXT is a responsive light and dark theme for ISPConfig. It unifies navigation,
 tables, filters, forms, feedback and responsive layouts without replacing
 ISPConfig's established permissions, routes or server-side operations.
 
-![NEXT dashboard from installed version 1.2.2](docs/images/dashboard-runtime-v1.2.2.png)
+![NEXT dashboard from installed version 1.2.3](docs/images/dashboard-runtime-v1.2.3.png)
 
-The image is an actual runtime capture of stable version `v1.2.2` on
+The image is an actual runtime capture of stable version `v1.2.3` on
 ISPConfig 3.3.1p1. It is not a concept rendering.
 
 More actual runtime captures:
 
-- [Login](docs/images/login-runtime-v1.2.2.png)
-- [Table view](docs/images/table-runtime-v1.2.2.png)
-- [Form](docs/images/form-runtime-v1.2.2.png)
-- [Mobile navigation](docs/images/mobile-navigation-runtime-v1.2.2.png)
+- [Login](docs/images/login-runtime-v1.2.3.png)
+- [Table view](docs/images/table-runtime-v1.2.3.png)
+- [Form](docs/images/form-runtime-v1.2.3.png)
+- [Mobile navigation](docs/images/mobile-navigation-runtime-v1.2.3.png)
 
 ### Why NEXT was created
 
@@ -133,7 +133,7 @@ and the same interaction patterns work on desktop, tablet and mobile.
 
 ### Current status and compatibility
 
-`v1.2.2` is the current stable maintenance release:
+`v1.2.3` is the current stable maintenance release:
 
 - ISPConfig 3.3.1p1
 - PHP 8.1 or newer
@@ -142,15 +142,15 @@ and the same interaction patterns work on desktop, tablet and mobile.
 
 The complete runtime matrix, administrator, reseller, customer and mail-user
 views, and the visual desktop, tablet and mobile checks have passed. The
-Version 1.2.2 removes internal laboratory wording and completes consistent
-German and English runtime localization. The immutable `v1.2.2` tag identifies
-this exact validated source state, while `v1.2.1` remains unchanged.
+Version 1.2.3 completes mobile dashboard labels, cleans public package metadata
+and documents optional system-wide sign-in styling. The immutable `v1.2.3` tag
+identifies this exact validated source state; older tags remain unchanged.
 
 ### Installation and project information
 
 - [Installation in English](docs/INSTALLATION-EN.md)
 - [Compatibility and validation scope](docs/COMPATIBILITY.md)
-- [Version 1.2.2 release gate](docs/RELEASE-GATE-1.2.2.md)
+- [Version 1.2.3 release gate](docs/RELEASE-GATE-1.2.3.md)
 - [Changelog](CHANGELOG.md)
 - [Security policy](SECURITY.md)
 - [Contributing](CONTRIBUTING.md)

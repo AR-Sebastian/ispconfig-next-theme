@@ -3,14 +3,14 @@
     "id":  "com.ispconfig.next.theme",
     "name":  "ISPConfig NEXT",
     "version":  "1.1.2",
-    "stage":  "stable",
+    "stage":  "evaluation",
     "releaseDate":  "2026-07-30",
     "compatibility":  {
                           "ispconfig":  "3.3dev",
-                          "preview":  "Ubuntu 24.04 laboratory"
+                          "preview":  "Development-line evaluation only; stable 3.3.1p1 validation pending"
                       },
     "packageDirectory":  "next",
-    "releaseTag":  "ispconfig-next-theme-v1.1.2",
+    "releaseTag":  "v1.1.2",
     "supportedModules":  [
                              "login",
                              "dashboard",

@@ -1249,9 +1249,11 @@
       return request;
     },
 
-    switchTab: function(tab, target, force) {
+    switchTabDecision: function(tab, target, force, decision) {
       var idInput = query(document, 'form#pageForm [name="id"]');
       var id = idInput ? idInput.value : '';
+      if (decision === 'save') return ISPConfig.submitPageForm('pageForm', target);
+      if (decision === 'discard') return ISPConfig.navigateTo(target, { next_tab: tab, id: id });
       if (!force && id && ISPConfig.tabChangeWarning === 'y' && ISPConfig.pageFormChanged === true) {
         if (window.confirm(ISPConfig.tabChangeWarningTxt)) ISPConfig.submitPageForm('pageForm', target);
         else ISPConfig.navigateTo(target, { next_tab: tab, id: id });
@@ -1259,6 +1261,10 @@
       }
       if (id) ISPConfig.navigateTo(target, { next_tab: tab, id: id });
       else ISPConfig.submitPageForm('pageForm', target);
+    },
+
+    switchTab: function(tab, target, force) {
+      return ISPConfig.switchTabDecision(tab, target, force, null);
     },
 
     refreshContentInto: function(elementid, pagename) {

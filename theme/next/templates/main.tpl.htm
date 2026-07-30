@@ -102,7 +102,7 @@
 			        <p class="wb-dialog__supporting-text">{tmpl_var name="datalog_changes_end_txt"}</p>
 			      </div>
 			      <div class="wb-dialog__footer">
-			        <button type="button" class="wb-dialog__action wb-dialog__action--secondary" data-workbench-dialog-close>{tmpl_var name="datalog_changes_close_txt"}</button>
+			        <button type="button" class="wb-dialog__action wb-dialog__action--secondary" data-workbench-dialog-close data-workbench-dialog-autofocus>{tmpl_var name="datalog_changes_close_txt"}</button>
 			      </div>
 			  </div>
 			</div>
@@ -116,7 +116,7 @@
 			    </div>
 			    <div class="wb-dialog__body"><p id="workbenchTabChangeDialogMessage" data-workbench-tab-confirm-message></p></div>
 			    <div class="wb-dialog__footer">
-			      <button type="button" class="wb-dialog__action wb-dialog__action--secondary" data-workbench-tab-confirm-action="cancel">{tmpl_var name='workbench_tab_keep_editing_txt'}</button>
+			      <button type="button" class="wb-dialog__action wb-dialog__action--secondary" data-workbench-tab-confirm-action="cancel" data-workbench-dialog-autofocus>{tmpl_var name='workbench_tab_keep_editing_txt'}</button>
 			      <button type="button" class="wb-dialog__action wb-dialog__action--danger" data-workbench-tab-confirm-action="discard">{tmpl_var name='workbench_tab_discard_continue_txt'}</button>
 			      <button type="button" class="wb-dialog__action wb-dialog__action--primary" data-workbench-tab-confirm-action="save">{tmpl_var name='workbench_tab_save_continue_txt'}</button>
 			    </div>
@@ -148,7 +148,7 @@
   <script src='themes/workbench/assets/javascripts/workbench-native-interactions.js?ver=8'></script>
   <script type='application/json' id='workbench-content-messages'><tmpl_var name='workbench_content_messages_json'></script>
   <script src='themes/workbench/assets/javascripts/workbench-http.js?ver=10'></script>
-  <script src='themes/workbench/assets/javascripts/workbench-core.js?ver=47'></script>
+  <script src='themes/workbench/assets/javascripts/workbench-core.js?ver=48'></script>
   <script src='themes/workbench/assets/javascripts/workbench-field-search.js?ver=5'></script>
   <script src='themes/workbench/assets/javascripts/workbench-message-acknowledgement.js?ver=1'></script>
   <script src='themes/workbench/assets/javascripts/workbench-loading.js?ver=16'></script>
@@ -159,11 +159,11 @@
   <script src='themes/workbench/assets/javascripts/workbench-navigation.js?ver=53'></script>
   <script src='themes/workbench/assets/javascripts/workbench-dashboard-metrics.js?ver=7'></script>
   <script src='themes/workbench/assets/javascripts/workbench-dashboard-layout.js?ver=46'></script>
-  <script src='themes/workbench/assets/javascripts/workbench-dialog.js?ver=2'></script>
+  <script src='themes/workbench/assets/javascripts/workbench-dialog.js?ver=3'></script>
   <script src='themes/workbench/assets/javascripts/workbench-disclosure.js?ver=3'></script>
   <script src='themes/workbench/assets/javascripts/workbench-form-state.js?ver=11'></script>
   <script src='themes/workbench/assets/javascripts/workbench-tabstrip.js?ver=4'></script>
-  <script src='themes/workbench/assets/javascripts/workbench-tab-confirm.js?ver=4'></script>
+  <script src='themes/workbench/assets/javascripts/workbench-tab-confirm.js?ver=5'></script>
   <script src='themes/workbench/assets/javascripts/workbench-accessibility.js?ver=3'></script>
   <script src='themes/workbench/assets/javascripts/workbench-validation.js?ver=7'></script>
   <script src='themes/workbench/assets/javascripts/workbench-submit-feedback.js?ver=11'></script>

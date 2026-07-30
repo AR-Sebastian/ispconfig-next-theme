@@ -52,26 +52,18 @@
     var decision = pending;
     var target = dialog();
     if (!decision || !decision.anchor || !decision.anchor.isConnected || !target) return cancel();
-    // switchTab interprets a positive confirmation as "save" and a negative
-    // confirmation as "discard and navigate". A discard-only policy must
-    // therefore take the same negative path as the explicit discard action.
-    var answer = action === 'save';
     pending = null;
     committing = true;
     window.workbenchDialog.close(target, false);
     committing = false;
-    var originalConfirm = window.confirm;
     var runtime = app();
-    window.confirm = function () { return answer; };
-    try {
-      runtime.switchTab(
-        decision.anchor.getAttribute('data-change-tab'),
-        decision.anchor.getAttribute('data-tab-target'),
-        decision.anchor.getAttribute('data-tab-force') === 'true'
-      );
-    } finally {
-      window.confirm = originalConfirm;
-    }
+    if (!runtime || typeof runtime.switchTabDecision !== 'function') return;
+    runtime.switchTabDecision(
+      decision.anchor.getAttribute('data-change-tab'),
+      decision.anchor.getAttribute('data-tab-target'),
+      decision.anchor.getAttribute('data-tab-force') === 'true',
+      action
+    );
   }
 
   document.addEventListener('click', function (event) {

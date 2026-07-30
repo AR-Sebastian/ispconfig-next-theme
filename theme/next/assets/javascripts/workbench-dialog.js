@@ -23,8 +23,9 @@
   function focus(dialog) {
     var target = resolveDialog(dialog) || openDialog;
     if (!isOpen(target)) return false;
+    var preferred = target.querySelector('[data-workbench-dialog-autofocus]:not([disabled]):not([hidden])');
     var elements = focusable(target);
-    (elements[0] || target).focus();
+    (preferred || elements[0] || target).focus();
     return target.contains(document.activeElement);
   }
 
@@ -41,7 +42,9 @@
     target.hidden = false;
     target.setAttribute('aria-hidden', 'false');
     document.body.classList.add('wb-dialog-open');
-    if (returnFocus && returnFocus.setAttribute) returnFocus.setAttribute('aria-expanded', 'true');
+    if (returnFocus && returnFocus.setAttribute && (returnFocus.getAttribute('aria-haspopup') === 'dialog' || returnFocus.getAttribute('aria-controls') === target.id)) {
+      returnFocus.setAttribute('aria-expanded', 'true');
+    }
     focus(target);
     window.setTimeout(function () { focus(target); }, 0);
     target.dispatchEvent(new CustomEvent('workbench:dialog-open', { bubbles: true }));
@@ -54,7 +57,9 @@
     target.setAttribute('aria-hidden', 'true');
     target.hidden = true;
     document.body.classList.remove('wb-dialog-open');
-    if (returnFocus && returnFocus.setAttribute) returnFocus.setAttribute('aria-expanded', 'false');
+    if (returnFocus && returnFocus.setAttribute && (returnFocus.getAttribute('aria-haspopup') === 'dialog' || returnFocus.getAttribute('aria-controls') === target.id)) {
+      returnFocus.setAttribute('aria-expanded', 'false');
+    }
     target.dispatchEvent(new CustomEvent('workbench:dialog-close', { bubbles: true }));
     openDialog = null;
     if (restoreFocus !== false && returnFocus && document.contains(returnFocus)) returnFocus.focus();
@@ -99,6 +104,11 @@
       event.preventDefault();
       first.focus();
     }
+  });
+
+  document.addEventListener('focusin', function (event) {
+    if (!openDialog || openDialog.contains(event.target)) return;
+    focus(openDialog);
   });
 
   window.workbenchDialog = {

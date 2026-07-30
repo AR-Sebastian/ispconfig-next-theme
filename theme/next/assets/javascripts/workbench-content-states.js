@@ -17,6 +17,36 @@
     return isGerman ? german : english;
   }
 
+  function isGenericActionLabel(value) {
+    return /^(?:(?:Aktion|Action)\s*\d*|Weitere Aktion|More action|Aktionen|Actions)$/i.test(String(value || '').replace(/\s+/g, ' ').trim());
+  }
+
+  function inferRowActionLabel(control, flags) {
+    var source = [
+      control.className,
+      control.getAttribute('href'),
+      control.getAttribute('data-load-content'),
+      control.getAttribute('data-workbench-load-content'),
+      control.getAttribute('data-confirm-action'),
+      control.getAttribute('name'),
+      control.getAttribute('value')
+    ].join(' ').toLowerCase();
+
+    if (flags.isDanger || /delete|remove|drop|purge|destroy|loeschen|entfernen/.test(source)) return localized('Löschen', 'Delete');
+    if (flags.isLogin || /loginas|login_as|login-as|impersonat|anmelden/.test(source)) return localized('Als Benutzer anmelden', 'Log in as user');
+    if (flags.isEdit || /(?:^|[\\/_-])edit(?:[.\\/_?-]|$)|bearbeiten/.test(source)) return localized('Bearbeiten', 'Edit');
+    if (/download|export|backup_download|icon-download/.test(source)) return localized('Herunterladen', 'Download');
+    if (/copy|duplicate|clone|dupliz/.test(source)) return localized('Duplizieren', 'Duplicate');
+    if (/restore|rollback|wiederherstell/.test(source)) return localized('Wiederherstellen', 'Restore');
+    if (/enable|activate|aktivieren/.test(source)) return localized('Aktivieren', 'Enable');
+    if (/disable|deactivate|deaktivieren/.test(source)) return localized('Deaktivieren', 'Disable');
+    if (/stat|monitor|traffic|usage|quota|chart/.test(source)) return localized('Statistik anzeigen', 'View statistics');
+    if (/preview|vorschau/.test(source)) return localized('Vorschau öffnen', 'Open preview');
+    if (/link|open|visit|external|icon-link/.test(source)) return localized('Öffnen', 'Open');
+    if (/add|create|new|hinzufuegen|erstellen|icon-add/.test(source)) return localized('Hinzufügen', 'Add');
+    return localized('Weitere Optionen öffnen', 'Open more options');
+  }
+
   try {
     var messageSource = document.getElementById('workbench-content-messages');
     messages = JSON.parse(messageSource ? messageSource.textContent : '{}');
@@ -714,7 +744,8 @@
           Array.prototype.forEach.call(controls, function(control, controlIndex) {
             var visibleLabel = control.tagName === 'INPUT' ? control.value : control.textContent;
             var label = control.getAttribute('aria-label') || control.title || (visibleLabel || '').replace(/\s+/g, ' ').trim();
-            if (/^(?:Aktion|Action)\s*\d+$/i.test(label)) label = '';
+            var hadGenericLabel = isGenericActionLabel(label);
+            if (hadGenericLabel) label = '';
             var isDanger = control.classList.contains('formbutton-danger') || control.classList.contains('btn-danger');
             var isLogin = /loginas|login_as|cid=|Anmelden als|Login as/i.test(control.className + ' ' + control.getAttribute('href') + ' ' + label);
             var isEdit = /edit|bearbeiten/i.test(control.className + ' ' + control.getAttribute('href') + ' ' + label);
@@ -724,16 +755,15 @@
             control.classList.toggle('wb-row-action--edit', isEdit);
             if (!isDanger && controlIndex === 0) control.classList.add('wb-row-action--primary');
             if (!label) {
-              var actionSource = [control.className, control.getAttribute('href'), control.getAttribute('data-load-content'), control.getAttribute('data-workbench-load-content')].join(' ');
-              if (isDanger || /delete|remove|löschen|loeschen/i.test(actionSource)) label = localized('Löschen', 'Delete');
-              else if (isLogin) label = localized('Als Benutzer anmelden', 'Log in as user');
-              else if (isEdit) label = localized('Bearbeiten', 'Edit');
-              else if (/stat|monitor|traffic|usage|quota/i.test(actionSource)) label = localized('Statistik anzeigen', 'View statistics');
-              else if (/link|open|visit|external/i.test(actionSource)) label = localized('Öffnen', 'Open');
-              else label = localized('Weitere Aktion', 'More action');
+              label = inferRowActionLabel(control, {
+                isDanger: isDanger,
+                isLogin: isLogin,
+                isEdit: isEdit
+              });
             }
-            if (!control.getAttribute('aria-label')) control.setAttribute('aria-label', label);
-            if (!control.title) control.title = label;
+            if (hadGenericLabel || !control.getAttribute('aria-label')) control.setAttribute('aria-label', label);
+            if (hadGenericLabel || !control.title) control.title = label;
+            if (hadGenericLabel || isGenericActionLabel(control.getAttribute('data-original-title'))) control.setAttribute('data-original-title', label);
             if (control.getAttribute('style') && /url\(/i.test(control.getAttribute('style'))) control.dataset.wbLegacyInlineIcon = 'true';
           });
         });

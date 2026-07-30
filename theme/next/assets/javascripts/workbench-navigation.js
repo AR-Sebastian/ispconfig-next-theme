@@ -705,8 +705,8 @@
     pendingModule = null;
     render();
     syncActiveNavigationState(dashboardTarget);
-    if (api && typeof api.navigateTo === 'function') {
-      api.navigateTo(dashboardTarget);
+    if (api && typeof api.loadContent === 'function') {
+      api.loadContent(dashboardTarget);
     } else if (api && typeof api.capp === 'function') {
       api.capp('dashboard');
     }

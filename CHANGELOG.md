@@ -1,5 +1,19 @@
 # Changelog
 
+## Unreleased
+
+## 1.1.4 - 2026-07-30
+
+- Tightened dashboard summary and 1×1 widget density.
+- Restored complete localized dashboard module names instead of ISPConfig's
+  server-truncated launcher labels.
+- Routed direct dashboard navigation through the same resilient content
+  lifecycle as every other module.
+- Corrected packaged README and installation references to the current release.
+- Revalidated Ubuntu 22.04/24.04 and Debian 12/13 with Apache and Nginx.
+- Revalidated administrator, reseller, customer and mail-user sessions without
+  fallback to the default theme.
+
 ## 1.1.3 - 2026-07-30
 
 - Added an explicit ISPConfig 3.3.1p1 compatibility candidate.

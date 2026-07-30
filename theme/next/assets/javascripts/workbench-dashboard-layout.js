@@ -365,6 +365,19 @@
     node.dataset.wbModulesDecorated = 'true';
   }
 
+  function standardModuleTitle(moduleName) {
+    var labels = language() === 'de' ? {
+      dashboard: '\u00dcbersicht', help: 'Support', client: 'Kunden', sites: 'Webseiten',
+      billing: 'Fakturierung', mail: 'E-Mail', dns: 'DNS', monitor: '\u00dcberwachung',
+      tools: 'Einstellungen', admin: 'System'
+    } : {
+      dashboard: 'Overview', help: 'Support', client: 'Clients', sites: 'Sites',
+      billing: 'Billing', mail: 'Email', dns: 'DNS', monitor: 'Monitoring',
+      tools: 'Settings', admin: 'System'
+    };
+    return labels[String(moduleName || '').trim().toLowerCase()] || '';
+  }
+
   function splitModuleDashlet(host) {
     var source = host.querySelector(':scope > .wb-dashlet[data-wb-dashlet="modules"]');
     if (!source || source.dataset.wbAtomicSplit === 'true') return;
@@ -377,12 +390,14 @@
       var title = titleNode ? titleNode.textContent.replace(/\s+/g, ' ').trim() : t('moduleWidget') + ' ' + (index + 1);
       var moduleLink = item.querySelector('[data-capp]');
       var moduleName = moduleLink ? moduleLink.getAttribute('data-capp') : '';
-      var navigationItems = Array.prototype.slice.call(document.querySelectorAll('#main-navigation [data-workbench-module]'));
-      var navigationItem = navigationItems.find(function (candidate) {
+      var navigationItems = Array.prototype.slice.call(document.querySelectorAll('#workbench-mobile-navigation [data-workbench-module], #main-navigation [data-workbench-module]'));
+      var matchingNavigationItems = navigationItems.filter(function (candidate) {
         return candidate.getAttribute('data-workbench-module') === moduleName;
       });
-      var navigationTitle = navigationItem ? navigationItem.querySelector('.title') : null;
-      var completeTitle = navigationTitle ? navigationTitle.textContent.replace(/\s+/g, ' ').trim() : '';
+      var completeTitle = matchingNavigationItems.map(function (candidate) {
+        var navigationTitle = candidate.querySelector('.title');
+        return (navigationTitle ? navigationTitle.textContent : candidate.getAttribute('aria-label') || candidate.textContent || '').replace(/\s+/g, ' ').trim();
+      }).sort(function (left, right) { return right.length - left.length; })[0] || standardModuleTitle(moduleName);
       if (completeTitle) {
         var shortenedTitle = title;
         title = completeTitle;

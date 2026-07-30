@@ -4,7 +4,7 @@
 
 | Component | Supported baseline |
 |---|---|
-| ISPConfig | 3.3 development line (`3.3dev`) for the current evaluation package |
+| ISPConfig | 3.3.1p1 for the `release/v1.1.3` candidate |
 | PHP | 8.1 and newer |
 | Web server | Apache or Nginx as configured by ISPConfig |
 | Desktop browsers | Current Chrome, Edge, Firefox and Safari |
@@ -30,10 +30,11 @@ Server provisioning remains controlled by ISPConfig. The theme does not replace 
 
 The `release/v1.1.3` candidate names ISPConfig `3.3.1p1` so it can be tested
 without ISPConfig falling back to the default theme. It has passed clean
-Ubuntu 22.04 and Ubuntu 24.04 installations with Apache and Nginx,
+Ubuntu 22.04, Ubuntu 24.04, Debian 12 and Debian 13 installations with
+Apache and Nginx,
 authenticated administrator login, actual NEXT selection without fallback
 and all 47 theme assets referenced by each rendered dashboard.
 
 This is candidate evidence, not yet a public compatibility claim. The
-remaining distributions and the reseller, customer and mail-user views must
+reseller, customer and mail-user views plus the visual browser matrix must
 still pass before the candidate can be merged and tagged.

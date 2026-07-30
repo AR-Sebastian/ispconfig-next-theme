@@ -40,9 +40,9 @@ body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet {
   width: auto;
   height: 100%;
   min-width: 0;
-  min-height: 156px;
+  min-height: 132px;
   margin: 0;
-  padding: 14px;
+  padding: 12px;
   overflow: hidden;
   border: 1px solid var(--wb-dashlet-soft-border);
   border-radius: 14px;
@@ -157,9 +157,9 @@ body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashboard-overview
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 5px 14px;
   min-width: 0;
-  min-height: 76px;
+  min-height: 68px;
   align-content: center;
-  padding: 11px 14px;
+  padding: 9px 13px;
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--wb-action) 8%, var(--wb-border));
   border-radius: 13px;
@@ -2585,13 +2585,13 @@ body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-at
 body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-atomic-source='modules'] {
   --wb-module-widget-icon: clamp(34px, 10cqi, 42px);
   --wb-module-widget-title: clamp(14px, 5cqi, 18px);
-  --wb-module-widget-body: clamp(82px, 28cqi, 112px);
+  --wb-module-widget-body: clamp(72px, 24cqi, 96px);
 }
 
 body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-atomic-source='modules'][data-wb-module-viewport='compact'] {
   --wb-module-widget-icon: clamp(32px, 11cqi, 38px);
   --wb-module-widget-title: clamp(14px, 5cqi, 17px);
-  --wb-module-widget-body: clamp(78px, 26cqi, 104px);
+  --wb-module-widget-body: clamp(68px, 22cqi, 90px);
 }
 
 body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-atomic-source='modules'][data-wb-module-viewport='tall'] {

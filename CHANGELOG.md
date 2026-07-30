@@ -1,6 +1,11 @@
 # Changelog
 
-## 1.1.3 - release candidate
+## Unreleased
+
+- Tightened dashboard summary and 1×1 widget density.
+- Corrected packaged README and installation references to the current release.
+
+## 1.1.3 - 2026-07-30
 
 - Added an explicit ISPConfig 3.3.1p1 compatibility candidate.
 - Verified real NEXT selection without fallback on a clean stable installation.

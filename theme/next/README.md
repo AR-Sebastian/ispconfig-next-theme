@@ -1,4 +1,4 @@
-# ISPConfig Theme NEXT 1.1.2
+# ISPConfig Theme NEXT 1.1.3
 
 NEXT is a responsive light and dark interface theme for ISPConfig.
 
@@ -9,4 +9,3 @@ Install this directory as:
 ```
 
 See the repository documentation for requirements, installation, updates and rollback.
-

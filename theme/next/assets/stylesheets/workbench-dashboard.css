@@ -669,9 +669,9 @@ body.wb-dashboard-page .wb-dashlet-metric-atomic[data-wb-metric-viewport='detail
   letter-spacing: .04em;
 }
 
-body.wb-dashboard-page .wb-dashlet-metric-atomic[data-wb-metric-viewport='compact'] .wb-dashboard-metric-card__label::after { content: '1×1'; }
-body.wb-dashboard-page .wb-dashlet-metric-atomic[data-wb-metric-viewport='tall'] .wb-dashboard-metric-card__label::after { content: '1×2'; }
-body.wb-dashboard-page .wb-dashlet-metric-atomic[data-wb-metric-viewport='detail'] .wb-dashboard-metric-card__label::after { content: '2×2'; }
+body.wb-dashboard-page .wb-dashlet-metric-atomic[data-wb-metric-viewport='compact'] .wb-dashboard-metric-card__label::after { content: '1Ãƒâ€”1'; }
+body.wb-dashboard-page .wb-dashlet-metric-atomic[data-wb-metric-viewport='tall'] .wb-dashboard-metric-card__label::after { content: '1Ãƒâ€”2'; }
+body.wb-dashboard-page .wb-dashlet-metric-atomic[data-wb-metric-viewport='detail'] .wb-dashboard-metric-card__label::after { content: '2Ãƒâ€”2'; }
 
 body.wb-dashboard-page .wb-dashlet-metric-atomic[data-wb-metric-viewport='detail'] .wb-dashboard-metric-card__value {
   font-size: clamp(24px, 4cqi, 42px);
@@ -1515,7 +1515,7 @@ body.wb-dashboard-page .wb-dashlet-module-atomic[data-wb-size='2x2'] .wb-module-
 }
 
 .wb-dashboard-metric-card__toggle[aria-expanded='true']::after {
-  content: '−';
+  content: 'Ã¢Ë†â€™';
 }
 
 .wb-dashboard-metric-card__toggle:hover,
@@ -1717,7 +1717,7 @@ body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet > .wb-dash
   padding-block-end: clamp(9px, 1cqi, 13px);
 }
 
-body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet > .wb-dashlet__header :is(h2, h3) {
+body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet > .wb-dashlet__header :is(h2, h3, h4, header) {
   letter-spacing: -.035em;
 }
 
@@ -2357,7 +2357,7 @@ body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-da
   display: none;
 }
 
-body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-dashboard-cockpit] > .wb-dashlet__header :is(h2, h3) {
+body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet[data-wb-dashboard-cockpit] > .wb-dashlet__header :is(h2, h3, h4, header) {
   min-inline-size: 0;
   overflow: hidden;
   text-overflow: ellipsis;

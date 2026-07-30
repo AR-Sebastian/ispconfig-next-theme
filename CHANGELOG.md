@@ -3,6 +3,10 @@
 ## Unreleased
 
 - Tightened dashboard summary and 1×1 widget density.
+- Restored complete localized dashboard module names instead of ISPConfig's
+  server-truncated launcher labels.
+- Routed direct dashboard navigation through the same resilient content
+  lifecycle as every other module.
 - Corrected packaged README and installation references to the current release.
 
 ## 1.1.3 - 2026-07-30

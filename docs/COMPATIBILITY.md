@@ -30,9 +30,9 @@ Server provisioning remains controlled by ISPConfig. The theme does not replace 
 
 The `release/v1.1.3` candidate names ISPConfig `3.3.1p1` so it can be tested
 without ISPConfig falling back to the default theme. It has passed clean
-Ubuntu 22.04 installations with Apache and Nginx, authenticated administrator
-login, actual NEXT selection without fallback and all 47 theme assets
-referenced by each rendered dashboard.
+Ubuntu 22.04 and Ubuntu 24.04 installations with Apache and Nginx,
+authenticated administrator login, actual NEXT selection without fallback
+and all 47 theme assets referenced by each rendered dashboard.
 
 This is candidate evidence, not yet a public compatibility claim. The
 remaining distributions and the reseller, customer and mail-user views must

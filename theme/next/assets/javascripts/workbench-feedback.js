@@ -35,7 +35,7 @@
     content = document.createElement('div');
     content.className = 'wb-feedback__content';
     Array.prototype.slice.call(alert.childNodes).forEach(function(node) {
-      if (node.nodeType === 1 && node.matches('.close, [data-workbench-dismiss], .wb-feedback__icon')) return;
+      if (node.nodeType === 1 && node.matches('.close, [data-workbench-dismiss], .wb-feedback__icon, .wb-feedback__action')) return;
       content.appendChild(node);
     });
     alert.appendChild(content);
@@ -130,7 +130,23 @@
     controller.resume();
   }
 
-  function show(message, state) {
+  function actionControl(options) {
+    if (!options || !options.actionLabel || (!options.actionHref && typeof options.onAction !== 'function')) return null;
+    var control = document.createElement(options.actionHref ? 'a' : 'button');
+    control.className = 'wb-feedback__action';
+    control.textContent = String(options.actionLabel);
+    if (options.actionHref) control.href = new URL(options.actionHref, document.baseURI).href;
+    else {
+      control.type = 'button';
+      control.addEventListener('click', function(event) {
+        event.preventDefault();
+        options.onAction(event);
+      });
+    }
+    return control;
+  }
+
+  function show(message, state, options) {
     var text = String(message || '').trim();
     if (!text) return null;
     var host = document.getElementById('pageContent');
@@ -149,6 +165,11 @@
         item.getAttribute('data-workbench-feedback-tone') === toneName;
     });
     if (duplicate) {
+      if (!duplicate.querySelector(':scope > .wb-feedback__action')) {
+        var duplicateAction = actionControl(options);
+        var duplicateDismiss = duplicate.querySelector(':scope > [data-workbench-dismiss]');
+        if (duplicateAction) duplicate.insertBefore(duplicateAction, duplicateDismiss || null);
+      }
       stack.prepend(duplicate);
       scheduleGeneratedDismiss(duplicate, toneName);
       return duplicate;
@@ -160,6 +181,7 @@
     alert.setAttribute('data-workbench-feedback-tone', toneName);
     var content = document.createElement('p');
     content.textContent = text;
+    var action = actionControl(options);
     var dismiss = document.createElement('button');
     dismiss.type = 'button';
     dismiss.className = 'close';
@@ -167,6 +189,7 @@
     dismiss.setAttribute('aria-label', localized('Schließen', 'Close'));
     dismiss.textContent = '×';
     alert.appendChild(content);
+    if (action) alert.appendChild(action);
     alert.appendChild(dismiss);
     stack.prepend(alert);
     enhanceAlert(alert);
@@ -227,6 +250,12 @@
     var host = document.getElementById('pageContent');
     if (!host || hasAuthoritativeError(host)) return null;
     if (window.navigator && window.navigator.onLine === false) return connectivityFeedback(false);
+    if (/^Session expired\./.test(String(message || ''))) {
+      return show(runtimeMessage(message), 'danger', {
+        actionLabel: localized('Neu anmelden', 'Sign in again'),
+        actionHref: 'index.php'
+      });
+    }
     return show(runtimeMessage(message), 'danger');
   }
 

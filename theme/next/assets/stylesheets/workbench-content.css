@@ -170,7 +170,7 @@ body.wb-app-navigation-enabled #pageContent .wb-notice__icon::before { content: 
 body.wb-app-navigation-enabled #pageContent :is(.wb-notice--danger, .wb-notice--warning) .wb-notice__icon::before { content: '!'; }
 body.wb-app-navigation-enabled #pageContent .wb-notice--success .wb-notice__icon::before { content: '\2713'; }
 body.wb-app-navigation-enabled #pageContent .wb-feedback__icon svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-body.wb-app-navigation-enabled #pageContent :is(.wb-notice, .wb-feedback) > :not(.wb-notice__icon, .wb-feedback__icon, .close, [data-workbench-dismiss]) { grid-column: 2; min-width: 0; }
+body.wb-app-navigation-enabled #pageContent :is(.wb-notice, .wb-feedback) > :not(.wb-notice__icon, .wb-feedback__icon, .wb-feedback__action, .close, [data-workbench-dismiss]) { grid-column: 2; min-width: 0; }
 body.wb-app-navigation-enabled #pageContent .wb-feedback__content { display: flow-root; min-width: 0; overflow-wrap: anywhere; }
 body.wb-app-navigation-enabled #pageContent .wb-feedback__content > :first-child { margin-top: 0; }
 body.wb-app-navigation-enabled #pageContent .wb-feedback__content > :last-child { margin-bottom: 0; }
@@ -181,6 +181,8 @@ body.wb-app-navigation-enabled #pageContent .wb-feedback > :is(.alert-label, .al
 body.wb-app-navigation-enabled #pageContent .wb-feedback > .alert-label { font-weight: 800; }
 body.wb-app-navigation-enabled #pageContent :is(.wb-notice, .wb-feedback) p:last-child { margin-bottom: 0; }
 body.wb-app-navigation-enabled #pageContent .wb-feedback > :is(.close, [data-workbench-dismiss]) { grid-column: 3; grid-row: 1; width: 28px; height: 28px; margin: -2px; border-radius: 7px; }
+body.wb-app-navigation-enabled #pageContent .wb-feedback__action { display: inline-flex; min-height: 32px; align-items: center; justify-content: center; grid-column: 2; width: max-content; margin-top: 8px; padding: 6px 10px; color: inherit; border: 1px solid color-mix(in srgb, currentColor 28%, var(--wb-border)); border-radius: 8px; background: color-mix(in srgb, currentColor 6%, var(--wb-surface)); font-size: 12px; font-weight: 780; line-height: 1.2; text-decoration: none; }
+body.wb-app-navigation-enabled #pageContent .wb-feedback__action:is(:hover, :focus-visible) { color: inherit; border-color: color-mix(in srgb, currentColor 52%, var(--wb-border)); background: color-mix(in srgb, currentColor 11%, var(--wb-surface)); text-decoration: none; }
 body.wb-app-navigation-enabled #pageContent > .wb-feedback-stack { display: grid; gap: 8px; margin: 0 0 14px; }
 body.wb-app-navigation-enabled #pageContent > .wb-feedback-stack:empty { display: none; }
 body.wb-app-navigation-enabled #pageContent > .wb-feedback-stack > .wb-feedback { margin: 0; }

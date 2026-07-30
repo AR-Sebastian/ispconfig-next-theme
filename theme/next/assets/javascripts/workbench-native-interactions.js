@@ -1,6 +1,10 @@
 (function () {
   'use strict';
 
+  var activeTooltipControl = null;
+  var tooltipNode = null;
+  var tooltipId = 'workbench-native-tooltip';
+
   function emitNative(element, name, detail, cancelable) {
     if (!element) return false;
     return element.dispatchEvent(new CustomEvent(name, {
@@ -85,14 +89,87 @@
     return visible ? window.workbenchDialog.open(element, relatedTarget) : window.workbenchDialog.close(element, true);
   }
 
+  function ensureTooltipNode() {
+    if (tooltipNode && tooltipNode.isConnected) return tooltipNode;
+    tooltipNode = document.createElement('div');
+    tooltipNode.id = tooltipId;
+    tooltipNode.className = 'wb-native-tooltip';
+    tooltipNode.setAttribute('role', 'tooltip');
+    tooltipNode.hidden = true;
+    document.body.appendChild(tooltipNode);
+    return tooltipNode;
+  }
+
+  function tooltipText(element, action) {
+    return String(
+      element.dataset.workbenchTooltipText ||
+      element.getAttribute('data-original-title') ||
+      element.getAttribute('title') ||
+      action && action.title ||
+      ''
+    ).replace(/\s+/g, ' ').trim();
+  }
+
+  function positionTooltip(control, tooltip) {
+    var rect = control.getBoundingClientRect();
+    var gap = 9;
+    var margin = 10;
+    var left = rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2);
+    left = Math.max(margin, Math.min(left, window.innerWidth - tooltip.offsetWidth - margin));
+    var top = rect.top - tooltip.offsetHeight - gap;
+    var placement = 'top';
+    if (top < margin) {
+      top = rect.bottom + gap;
+      placement = 'bottom';
+    }
+    tooltip.style.left = Math.round(left) + 'px';
+    tooltip.style.top = Math.round(Math.max(margin, top)) + 'px';
+    tooltip.dataset.placement = placement;
+  }
+
+  function showTooltip(control) {
+    if (!control || control.dataset.workbenchNativeTooltip !== 'true') return false;
+    var value = tooltipText(control);
+    if (!value) return false;
+    var tooltip = ensureTooltipNode();
+    activeTooltipControl = control;
+    tooltip.textContent = value;
+    tooltip.hidden = false;
+    control.setAttribute('aria-describedby', tooltipId);
+    window.requestAnimationFrame(function() {
+      if (activeTooltipControl === control && !tooltip.hidden) positionTooltip(control, tooltip);
+    });
+    return true;
+  }
+
+  function hideTooltip(control) {
+    if (control && activeTooltipControl && control !== activeTooltipControl) return false;
+    if (activeTooltipControl) {
+      var previous = activeTooltipControl.dataset.workbenchTooltipDescribedBy || '';
+      if (previous) activeTooltipControl.setAttribute('aria-describedby', previous);
+      else activeTooltipControl.removeAttribute('aria-describedby');
+    }
+    activeTooltipControl = null;
+    if (tooltipNode) tooltipNode.hidden = true;
+    return true;
+  }
+
   function initializeTooltip(element, action) {
     if (!element) return false;
     if (action === 'destroy') {
+      hideTooltip(element);
+      if (element.dataset.workbenchTooltipText && !element.getAttribute('title')) element.setAttribute('title', element.dataset.workbenchTooltipText);
+      delete element.dataset.workbenchTooltipText;
+      delete element.dataset.workbenchTooltipDescribedBy;
       delete element.dataset.workbenchNativeTooltip;
       return true;
     }
-    var title = element.getAttribute('data-original-title') || element.getAttribute('title') || action && action.title;
-    if (title && !element.getAttribute('title')) element.setAttribute('title', title);
+    var title = tooltipText(element, action);
+    if (!title) return false;
+    if (!element.dataset.workbenchTooltipDescribedBy) element.dataset.workbenchTooltipDescribedBy = element.getAttribute('aria-describedby') || '';
+    element.dataset.workbenchTooltipText = title;
+    element.setAttribute('data-original-title', title);
+    element.removeAttribute('title');
     element.dataset.workbenchNativeTooltip = 'true';
     return true;
   }
@@ -103,6 +180,9 @@
       trigger.setAttribute('data-workbench-dismiss', 'alert');
       trigger.removeAttribute('data-dismiss');
       trigger.removeAttribute('data-bs-dismiss');
+    });
+    host.querySelectorAll('.wb-row-action[title]').forEach(function(element) {
+      element.setAttribute('data-workbench-tooltip', 'true');
     });
     host.querySelectorAll('[data-workbench-tooltip]').forEach(function (element) {
       initializeTooltip(element);
@@ -129,9 +209,47 @@
     }
   });
 
+  document.addEventListener('pointerover', function(event) {
+    var control = event.target.closest('[data-workbench-native-tooltip="true"]');
+    if (control) showTooltip(control);
+  });
+
+  document.addEventListener('pointerout', function(event) {
+    var control = event.target.closest('[data-workbench-native-tooltip="true"]');
+    if (control && !control.contains(event.relatedTarget) && !control.contains(document.activeElement)) hideTooltip(control);
+  });
+
+  document.addEventListener('focusin', function(event) {
+    var control = event.target.closest('[data-workbench-native-tooltip="true"]');
+    if (control) showTooltip(control);
+  });
+
+  document.addEventListener('focusout', function(event) {
+    var control = event.target.closest('[data-workbench-native-tooltip="true"]');
+    if (control && !control.contains(event.relatedTarget)) hideTooltip(control);
+  });
+
   document.addEventListener('workbench:navigation-complete', function (event) {
+    hideTooltip(activeTooltipControl);
     synchronize(event.detail && event.detail.container || document.getElementById('pageContent'));
   });
+
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && activeTooltipControl) hideTooltip(activeTooltipControl);
+  });
+
+  window.addEventListener('resize', function() {
+    if (activeTooltipControl && tooltipNode && !tooltipNode.hidden) positionTooltip(activeTooltipControl, tooltipNode);
+  });
+
+  window.addEventListener('scroll', function() {
+    if (!activeTooltipControl) return;
+    if (activeTooltipControl.contains(document.activeElement) && tooltipNode && !tooltipNode.hidden) {
+      positionTooltip(activeTooltipControl, tooltipNode);
+    } else {
+      hideTooltip(activeTooltipControl);
+    }
+  }, true);
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () { synchronize(document); }, { once: true });

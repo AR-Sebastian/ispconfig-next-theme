@@ -648,6 +648,36 @@ body.wb-app-navigation-enabled #pageContent :is(.progress-bar-success, .progress
 body.wb-app-navigation-enabled #pageContent .progress-bar-warning > span { color: #172033; }
 
 body.wb-app-navigation-enabled .tooltip-inner { max-width: 280px; padding: 7px 10px; color: #fff; border-radius: 7px; background: #111827; font-size: 11px; line-height: 1.4; }
+body.wb-app-navigation-enabled .wb-native-tooltip {
+  position: fixed;
+  z-index: 1400;
+  width: max-content;
+  max-width: min(22rem, calc(100vw - 20px));
+  padding: 7px 10px;
+  overflow-wrap: anywhere;
+  pointer-events: none;
+  color: #f8fafc;
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 8px;
+  background: #111827;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, .24);
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.4;
+  text-align: start;
+}
+body.wb-app-navigation-enabled .wb-native-tooltip[hidden] { display: none; }
+body.wb-app-navigation-enabled .wb-native-tooltip::after {
+  position: absolute;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  background: #111827;
+  content: '';
+  transform: translateX(-50%) rotate(45deg);
+}
+body.wb-app-navigation-enabled .wb-native-tooltip[data-placement='top']::after { bottom: -4px; }
+body.wb-app-navigation-enabled .wb-native-tooltip[data-placement='bottom']::after { top: -4px; }
 body.wb-app-navigation-enabled .popover { padding: 0; color: var(--wb-text); border: 1px solid var(--wb-border); border-radius: 11px; background: var(--wb-surface); box-shadow: 0 18px 48px rgba(15, 23, 42, .18); }
 body.wb-app-navigation-enabled .popover-title { padding: 10px 12px; color: var(--wb-text); border-color: var(--wb-border); background: var(--wb-surface-muted); font-size: 12px; font-weight: 780; }
 body.wb-app-navigation-enabled .popover-content { padding: 12px; color: var(--wb-text-muted); font-size: 11px; line-height: 1.5; }

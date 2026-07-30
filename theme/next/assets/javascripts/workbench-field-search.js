@@ -25,6 +25,10 @@
     resultsLimit: localized('$ von % Ergebnissen', '$ of % results'),
     noResultsText: localized('Keine Ergebnisse.', 'No results.'),
     noResultsLimit: localized('0 Ergebnisse', '0 results'),
+    loadingText: localized('Vorschläge werden gesucht.', 'Searching for suggestions.'),
+    errorText: localized('Vorschläge konnten nicht geladen werden.', 'Suggestions could not be loaded.'),
+    resultText: localized('{count} Vorschlag verfügbar.', '{count} suggestion available.'),
+    resultsText: localized('{count} Vorschläge verfügbar.', '{count} suggestions available.'),
     searchFieldWatermark: '',
     displayEmptyCategories: false
     };
@@ -62,6 +66,13 @@
     state.input.setAttribute('aria-busy', busy ? 'true' : 'false');
   }
 
+  function announce(state, message) {
+    state.live.textContent = '';
+    window.requestAnimationFrame(function() {
+      if (states.get(state.input) === state) state.live.textContent = message;
+    });
+  }
+
   function clearList(state) {
     state.optionsList = [];
     state.activeIndex = -1;
@@ -71,7 +82,8 @@
   function statusRow(state, message, limit, kind) {
     var item = document.createElement('li');
     item.className = state.options.cssPrefix + 'cheader wb-field-search__status wb-field-search__status--' + kind;
-    item.setAttribute('role', 'status');
+    item.setAttribute('role', 'presentation');
+    item.setAttribute('aria-hidden', 'true');
     var title = document.createElement('p');
     title.className = state.options.cssPrefix + 'cheader-title';
     title.textContent = (state.options.ResultsTextPrefix ? state.options.ResultsTextPrefix + ': ' : '') + message;
@@ -153,16 +165,19 @@
     });
     if (!hasResults) {
       statusRow(state, state.options.noResultsText, state.options.noResultsLimit, 'empty');
+      announce(state, state.options.noResultsText);
       show(state);
       return;
     }
 
+    var resultCount = 0;
     categories.forEach(function(category) {
       if (!category || !Array.isArray(category.cdata)) return;
       if (!state.options.displayEmptyCategories && category.cdata.length === 0) return;
       var header = category.cheader || {};
       var limit = Number.isFinite(Number(header.limit)) ? Number(header.limit) : category.cdata.length;
       var visible = Math.min(limit, category.cdata.length);
+      resultCount += visible;
       var total = header.total === undefined ? category.cdata.length : header.total;
       statusRow(
         state,
@@ -172,6 +187,10 @@
       );
       category.cdata.slice(0, limit).forEach(function(item) { addOption(state, item || {}); });
     });
+    announce(
+      state,
+      (resultCount === 1 ? state.options.resultText : state.options.resultsText).replace('{count}', String(resultCount))
+    );
     show(state);
   }
 
@@ -196,12 +215,14 @@
     }
     if (!api || typeof api.requestJson !== 'function') {
       clearList(state);
-      statusRow(state, state.options.noResultsText, '', 'error');
+      statusRow(state, state.options.errorText, '', 'error');
+      announce(state, state.options.errorText);
       show(state);
       return;
     }
     if (state.request && typeof state.request.abort === 'function') state.request.abort();
     setBusy(state, true);
+    announce(state, state.options.loadingText);
     state.request = api.requestJson(state.options.dataSrc, {
       query: { q: query },
       timeout: 30000,
@@ -214,7 +235,8 @@
     }, function(error) {
       if (state.request !== current || isAbort(error)) return;
       clearList(state);
-      statusRow(state, state.options.noResultsText, '', 'error');
+      statusRow(state, state.options.errorText, '', 'error');
+      announce(state, state.options.errorText);
       show(state);
       state.input.dispatchEvent(new CustomEvent('workbench:search-error', { bubbles: true, detail: { error: error } }));
     }).then(function() {
@@ -239,6 +261,8 @@
     ['role', 'aria-autocomplete', 'aria-controls', 'aria-expanded', 'aria-activedescendant', 'aria-busy'].forEach(function(name) {
       input.removeAttribute(name);
     });
+    if (state.originalDescribedBy) input.setAttribute('aria-describedby', state.originalDescribedBy);
+    else input.removeAttribute('aria-describedby');
     states.delete(input);
     return true;
   }
@@ -249,23 +273,32 @@
     var settings = mergeOptions(options);
     var container = document.createElement('div');
     var list = document.createElement('ul');
+    var live = document.createElement('div');
     var id = 'wb-field-search-' + (++sequence);
     container.className = settings.cssPrefix + 'container wb-field-search';
     list.id = id + '-listbox';
     list.className = settings.cssPrefix + 'resultbox wb-field-search__results';
     list.setAttribute('role', 'listbox');
     list.hidden = true;
+    live.id = id + '-status';
+    live.className = 'sr-only wb-field-search__live';
+    live.setAttribute('role', 'status');
+    live.setAttribute('aria-live', 'polite');
+    live.setAttribute('aria-atomic', 'true');
+    var originalDescribedBy = input.getAttribute('aria-describedby') || '';
     input.parentNode.insertBefore(container, input);
     container.appendChild(input);
     container.appendChild(list);
+    container.appendChild(live);
     input.autocomplete = 'off';
     input.classList.add('wb-field-search__input');
     input.setAttribute('role', 'combobox');
     input.setAttribute('aria-autocomplete', 'list');
     input.setAttribute('aria-controls', list.id);
     input.setAttribute('aria-expanded', 'false');
+    input.setAttribute('aria-describedby', [originalDescribedBy, live.id].filter(Boolean).join(' '));
 
-    var state = { input: input, container: container, list: list, options: settings, optionsList: [], activeIndex: -1, timer: 0, request: null, listeners: [] };
+    var state = { input: input, container: container, list: list, live: live, originalDescribedBy: originalDescribedBy, options: settings, optionsList: [], activeIndex: -1, timer: 0, request: null, listeners: [] };
     states.set(input, state);
     function listen(type, handler) {
       input.addEventListener(type, handler);

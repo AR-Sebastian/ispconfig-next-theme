@@ -154,7 +154,7 @@
       var request = currentApi.requestForm(form, target, { timeout: 30000 });
       begin(root, control, request, { themeChange: themeChange });
       request.promise.then(function(responseText) {
-        if (successMessage) window.alert(successMessage);
+        if (successMessage && typeof currentApi.notify === 'function') currentApi.notify(successMessage, 'success');
         if (responseText.indexOf('HEADER_REDIRECT:') > -1) {
           currentApi.navigateTo(responseText.split(':')[1]);
         } else if (responseText.indexOf('LOGIN_REDIRECT:') > -1) {

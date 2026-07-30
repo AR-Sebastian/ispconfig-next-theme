@@ -446,7 +446,16 @@
     event.preventDefault();
     if (event.stopImmediatePropagation) event.stopImmediatePropagation();
     else event.stopPropagation();
-    if (alertUser) window.alert(region.getAttribute('data-template-lock-message') || 'This form is controlled by a master template.');
+    if (alertUser && window.ISPConfig && typeof window.ISPConfig.notify === 'function') {
+      window.ISPConfig.notify(
+        region.getAttribute('data-template-lock-message') || (
+          typeof window.workbenchLanguage === 'function' && window.workbenchLanguage() === 'de'
+            ? 'Dieses Formular wird durch eine Mastervorlage gesteuert.'
+            : 'This form is controlled by a master template.'
+        ),
+        'warning'
+      );
+    }
     if (field.blur) field.blur();
   }
 
@@ -1112,6 +1121,14 @@
       if (window.console && console.warn) console.warn(message);
     },
 
+    notify: function(message, state) {
+      if (window.workbenchFeedback && typeof window.workbenchFeedback.show === 'function') {
+        return window.workbenchFeedback.show(message, state || 'info');
+      }
+      if (window.console && console.info) console.info(message);
+      return null;
+    },
+
 
     registerHook: function(name, callback) {
       if (!ISPConfig.registeredHooks[name]) ISPConfig.registeredHooks[name] = [];
@@ -1232,7 +1249,7 @@
       ISPConfig.beginRequest();
       var request = ISPConfig.requestForm(form, target, { timeout: 30000 });
       request.promise.then(function(responseText) {
-        if (successMessage) window.alert(successMessage);
+        if (successMessage) ISPConfig.notify(successMessage, 'success');
         if (handleRedirect(responseText)) return;
         setHtml(document.getElementById('pageContent'), responseText);
         ISPConfig.onAfterContentLoad(target, serialized);
@@ -1531,7 +1548,12 @@
       var addTplId = parts[0];
       var addTplText = parts[1] || '';
       if (!(Number(addTplId) > 0)) {
-        window.alert('no additional template selected');
+        ISPConfig.notify(
+          (typeof window.workbenchLanguage === 'function' && window.workbenchLanguage() === 'de')
+            ? 'Keine zusätzliche Vorlage ausgewählt.'
+            : 'No additional template selected.',
+          'warning'
+        );
         return;
       }
       ISPConfig.new_tpl_add_id += 1;

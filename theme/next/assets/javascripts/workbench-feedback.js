@@ -85,6 +85,42 @@
     Array.prototype.forEach.call(host.querySelectorAll('.wb-dialog'), enhanceDialog);
   }
 
+  function show(message, state) {
+    var text = String(message || '').trim();
+    if (!text) return null;
+    var host = document.getElementById('pageContent');
+    if (!host) return null;
+    var stack = host.querySelector(':scope > .wb-feedback-stack');
+    if (!stack) {
+      stack = document.createElement('div');
+      stack.className = 'wb-feedback-stack';
+      stack.setAttribute('aria-label', localized('Meldungen', 'Notifications'));
+      host.prepend(stack);
+    }
+
+    var toneName = ['success', 'danger', 'warning', 'info'].indexOf(state) > -1 ? state : 'info';
+    var alert = document.createElement('div');
+    alert.className = 'alert alert-' + toneName;
+    alert.setAttribute('data-workbench-generated-feedback', 'true');
+    var content = document.createElement('p');
+    content.textContent = text;
+    var dismiss = document.createElement('button');
+    dismiss.type = 'button';
+    dismiss.className = 'close';
+    dismiss.setAttribute('data-workbench-dismiss', 'alert');
+    dismiss.setAttribute('aria-label', localized('Schließen', 'Close'));
+    dismiss.textContent = '×';
+    alert.appendChild(content);
+    alert.appendChild(dismiss);
+    stack.prepend(alert);
+    enhanceAlert(alert);
+
+    Array.prototype.slice.call(stack.querySelectorAll('[data-workbench-generated-feedback]')).slice(3).forEach(function(oldAlert) {
+      oldAlert.remove();
+    });
+    return alert;
+  }
+
   function start() {
     enhance(document);
     var page = document.getElementById('pageContent');
@@ -102,6 +138,6 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
   else start();
 
-  window.workbenchFeedback = { enhance: enhance };
+  window.workbenchFeedback = { enhance: enhance, show: show };
   window.workbenchFeedbackInstalled = true;
 }(window, document));

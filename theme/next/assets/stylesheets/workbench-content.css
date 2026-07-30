@@ -181,6 +181,9 @@ body.wb-app-navigation-enabled #pageContent .wb-feedback > :is(.alert-label, .al
 body.wb-app-navigation-enabled #pageContent .wb-feedback > .alert-label { font-weight: 800; }
 body.wb-app-navigation-enabled #pageContent :is(.wb-notice, .wb-feedback) p:last-child { margin-bottom: 0; }
 body.wb-app-navigation-enabled #pageContent .wb-feedback > :is(.close, [data-workbench-dismiss]) { grid-column: 3; grid-row: 1; width: 28px; height: 28px; margin: -2px; border-radius: 7px; }
+body.wb-app-navigation-enabled #pageContent > .wb-feedback-stack { display: grid; gap: 8px; margin: 0 0 14px; }
+body.wb-app-navigation-enabled #pageContent > .wb-feedback-stack:empty { display: none; }
+body.wb-app-navigation-enabled #pageContent > .wb-feedback-stack > .wb-feedback { margin: 0; }
 
 body.wb-app-navigation-enabled :is(.wb-form-state, .wb-submit-feedback) {
   display: inline-flex;

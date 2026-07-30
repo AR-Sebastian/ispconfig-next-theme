@@ -63,7 +63,7 @@
       accountLimit: 'Account limit', moreInDetails: '+{count} more in details', dashboardLayoutControls: 'Dashboard layout controls',
       resetLayout: 'Reset layout', showHiddenWidgets: 'Show hidden widgets', openModule: 'Open module', editHint: 'Move and resize',
       dragWidget: 'Drag {name} to reposition', resizeTo: 'Resize {name} to {size}', hideWidget: 'Hide {name}',
-      emptyTitle: 'Your dashboard is clear', emptyText: 'All widgets are hidden. Restore them whenever you need them.', restoreWidgets: 'Restore widgets',
+      emptyTitle: 'Your dashboard is clear', emptyText: 'All widgets are hidden. Restore the recommended operational view or choose every widget from the toolbar.', restoreWidgets: 'Restore recommended view',
       confirmReset: 'Confirm reset', resetWarning: 'Click again to restore the default widget order and sizes.',
       workspace: 'Operations workspace', workspaceSummary: 'Services, capacity and shortcuts at a glance.',
       destinationCount: '{count} destinations', destinationSingle: '1 destination', metricCount: '{count} live metrics', metricSingle: '1 live metric',
@@ -90,7 +90,7 @@
       layoutControls: 'Layoutsteuerung für {name}', dashboardWidget: 'Dashboard-Widget', moveEarlier: 'Widget nach vorne verschieben',
       resetLayout: 'Layout zurücksetzen', showHiddenWidgets: 'Ausgeblendete Widgets zeigen', openModule: 'Modul öffnen', editHint: 'Verschieben und skalieren',
       dragWidget: '{name} zum Verschieben ziehen', resizeTo: '{name} auf {size} skalieren', hideWidget: '{name} ausblenden',
-      emptyTitle: 'Das Dashboard ist aufgeräumt', emptyText: 'Alle Widgets sind ausgeblendet und können jederzeit wiederhergestellt werden.', restoreWidgets: 'Widgets wiederherstellen',
+      emptyTitle: 'Das Dashboard ist aufgeräumt', emptyText: 'Alle Widgets sind ausgeblendet. Stelle die empfohlene Arbeitsansicht wieder her oder zeige über die Werkzeugleiste bewusst alle Widgets.', restoreWidgets: 'Empfohlene Ansicht wiederherstellen',
       confirmReset: 'Zurücksetzen bestätigen', resetWarning: 'Erneut klicken, um Standardreihenfolge und -größen wiederherzustellen.',
       workspace: 'Arbeitsbereich Betrieb', workspaceSummary: 'Dienste, Kapazitäten und Direkteinstiege auf einen Blick.',
       destinationCount: '{count} Direkteinstiege', destinationSingle: '1 Direkteinstieg', metricCount: '{count} Live-Kennzahlen', metricSingle: '1 Live-Kennzahl',
@@ -591,10 +591,21 @@
     return card;
   }
 
-  function restoreHidden(host) {
+  function showAllWidgets(host) {
     dashlets(host).forEach(function (node) {
       node.hidden = false;
       node.dataset.wbHidden = 'false';
+    });
+    save(host);
+    syncToolbar(host);
+  }
+
+  function restoreRecommended(host) {
+    dashlets(host).forEach(function (node) {
+      var hiddenByDefault = Boolean(defaultHidden[node.dataset.wbDashlet]);
+      node.hidden = hiddenByDefault;
+      node.dataset.wbHidden = hiddenByDefault ? 'true' : 'false';
+      setSize(node, defaultSizeFor(node));
     });
     save(host);
     syncToolbar(host);
@@ -620,7 +631,7 @@
     restore.type = 'button';
     restore.className = 'wb-dashboard-button wb-dashboard-button--primary';
     restore.textContent = t('restoreWidgets');
-    restore.addEventListener('click', function () { restoreHidden(host); });
+    restore.addEventListener('click', function () { restoreRecommended(host); });
     state.appendChild(restore);
     var toolbar = host.querySelector(':scope > .wb-dashboard-toolbar');
     (toolbar || host.querySelector(':scope > .wb-dashboard-overview') || host.querySelector(':scope > .page-header')).insertAdjacentElement('afterend', state);
@@ -1156,7 +1167,7 @@
       show.className = 'wb-dashboard-button wb-dashboard-layout-show-hidden';
       show.textContent = t('showHiddenWidgets');
       show.setAttribute('data-wb-layout-show-hidden', 'true');
-      show.addEventListener('click', function () { restoreHidden(host); });
+      show.addEventListener('click', function () { showAllWidgets(host); });
       actions.appendChild(show);
       (overview || header).insertAdjacentElement('afterend', toolbar);
       syncToolbar(host);

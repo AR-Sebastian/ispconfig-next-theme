@@ -3571,6 +3571,61 @@ html[data-wb-theme='dark'] body.wb-form-page.wb-form-profile--embedded-tables #p
   }
 }
 
+/* WP-1138: premium working density.
+ *
+ * The final form surface keeps generous focus targets while removing the
+ * presentation-like vertical rhythm that made long ISPConfig masks feel
+ * slower than they are. Technical editors and upload/branding surfaces retain
+ * their dedicated sizing rules.
+ */
+body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] {
+  --wb-form-final-control-height: 2.75rem;
+  --wb-form-final-label-width: clamp(10rem, 18cqi, 14rem);
+  --wb-form-final-row-gap: clamp(0.72rem, 1.25cqi, 1rem);
+  --wb-form-content-width: 78rem;
+}
+
+body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .nav-tabs {
+  min-block-size: 3.55rem;
+  padding: 0.5rem;
+}
+
+body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .nav-tabs > li > a {
+  min-block-size: 2.4rem;
+  padding-block: 0.55rem;
+}
+
+body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .tab-content {
+  padding: clamp(0.85rem, 1.55vw, 1.35rem);
+}
+
+body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group {
+  padding-block: clamp(0.68rem, 1.1cqi, 0.9rem);
+}
+
+body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group > :where(.control-label, label) {
+  padding-block-start: 0.62rem;
+}
+
+body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] :where(
+  .help-block,
+  .help-inline,
+  .form-text,
+  .description,
+  .hint,
+  small
+) {
+  margin-block-start: 0.35rem;
+  font-size: 0.82rem;
+  line-height: 1.48;
+}
+
+body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .wb-field-group:has(
+  > .wb-field-body > :is(input[type='checkbox'], input[type='radio'], .checkbox, .radio)
+) {
+  padding-block: 0.58rem;
+}
+
 /* WP-1007: form V1 premium convergence.
  *
  * The final form layer is intentionally calm and information-led. Required

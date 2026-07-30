@@ -4,7 +4,7 @@
 
 | Component | Supported baseline |
 |---|---|
-| ISPConfig | 3.3.1p1 for the `v1.2.3` stable release |
+| ISPConfig | 3.3.1p1 for the `v1.2.4` stable release |
 | PHP | 8.1 and newer |
 | Web server | Apache or Nginx as configured by ISPConfig |
 | Desktop browsers | Current Chrome, Edge, Firefox and Safari |
@@ -36,7 +36,7 @@ Server provisioning remains controlled by ISPConfig. The theme does not replace 
 
 ## Stable 3.3.1p1 release gate
 
-The `v1.2.3` stable release names ISPConfig `3.3.1p1` so it can be tested
+The `v1.2.4` stable release names ISPConfig `3.3.1p1` so it can be tested
 without ISPConfig falling back to the default theme. It has passed clean
 Ubuntu 22.04, Ubuntu 24.04, Debian 12 and Debian 13 installations with
 Apache and Nginx,

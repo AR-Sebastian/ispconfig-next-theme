@@ -1,4 +1,4 @@
-# ISPConfig NEXT Theme 1.2.3
+# ISPConfig NEXT Theme 1.2.4
 
 NEXT is the calm, responsive premium theme for ISPConfig. It
 modernizes the visible interface without replacing ISPConfig permissions,

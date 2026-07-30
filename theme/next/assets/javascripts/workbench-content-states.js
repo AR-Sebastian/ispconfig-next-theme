@@ -353,10 +353,10 @@
           if (label) control.setAttribute('aria-label', 'Filter ' + label);
         }
         if (control.tagName === 'INPUT' && !control.getAttribute('placeholder')) {
-          control.setAttribute('placeholder', 'Search...');
+          control.setAttribute('placeholder', localized('Suchen …', 'Search…'));
         }
         if (control.tagName === 'SELECT' && control.options.length && !control.options[0].textContent.trim()) {
-          control.options[0].textContent = 'All';
+          control.options[0].textContent = localized('Alle', 'All');
         }
       });
       var cell = row.lastElementChild;
@@ -947,6 +947,9 @@
 
   function enhanceLoadedContent(host, pageName, params, context) {
     if (!host) return;
+    runEnhancementStep('localization', function() {
+      if (typeof window.workbenchLocalize === 'function') window.workbenchLocalize(host);
+    });
     runEnhancementStep('page context', function() { decoratePageContext(host, pageName); });
     runEnhancementStep('page chrome', function() { decoratePageChrome(host, pageName); });
     runEnhancementStep('information architecture', function() { decorateInformationArchitecture(host); });

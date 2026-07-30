@@ -37,7 +37,9 @@
           filterShow: 'Filter anzeigen', filterHide: 'Filter ausblenden',
           pagination: 'Seitennavigation', paginationPage: 'Seite',
           paginationSummary: 'Seite {current} von {total}',
-          listVisibleResults: '{count} Einträge auf dieser Seite', tableActions: 'Aktionen'
+          listVisibleResults: '{count} Einträge auf dieser Seite', tableActions: 'Aktionen',
+          tabWarning: 'Diese Seite enthält ungespeicherte Änderungen.',
+          tabDiscard: 'Ungespeicherte Änderungen verwerfen und fortfahren?'
         },
         en: {
           filterReset: 'Reset filters', filterResetActive: 'Reset active filters',
@@ -45,11 +47,18 @@
           filterShow: 'Show filters', filterHide: 'Hide filters',
           pagination: 'Pagination', paginationPage: 'Page',
           paginationSummary: 'Page {current} of {total}',
-          listVisibleResults: '{count} items on this page', tableActions: 'Actions'
+          listVisibleResults: '{count} items on this page', tableActions: 'Actions',
+          tabWarning: 'This page contains unsaved changes.',
+          tabDiscard: 'Discard the unsaved changes and continue?'
         }
       };
       var active = messages[language] || messages.en;
       Object.keys(active).forEach(function(key) { document.body.dataset['workbench' + key.charAt(0).toUpperCase() + key.slice(1)] = active[key]; });
+      var tabDialog = document.getElementById('workbenchTabChangeDialog');
+      if (tabDialog) {
+        tabDialog.dataset.warningMessage = active.tabWarning;
+        tabDialog.dataset.discardMessage = active.tabDiscard;
+      }
     }
   }
 

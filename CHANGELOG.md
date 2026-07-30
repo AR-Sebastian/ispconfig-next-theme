@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+## 1.2.4 - 2026-07-30
+
+- Reapplied German and English localization after every dynamically loaded view.
+- Localized generated table search fields, default selections and keyboard help.
+- Completed the full desktop, tablet and mobile visual acceptance with zero contrast and surface failures.
+- Replaced the public runtime gallery with captures from the released package.
+
 ## 1.2.3 - 2026-07-30
 
 - Added authoritative mobile labels to dashboard quota and account-limit tables.

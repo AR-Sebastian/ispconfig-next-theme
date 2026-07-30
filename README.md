@@ -7,17 +7,17 @@ Navigation, Tabellen, Filter, Formulare, Rückmeldungen und responsive Ansichten
 ohne die bewährten Berechtigungen, Routen oder Serveraktionen von ISPConfig zu
 ersetzen.
 
-![NEXT-Dashboard der installierten Version 1.2.0](docs/images/dashboard-runtime-v1.2.0.png)
+![NEXT-Dashboard der installierten Version 1.2.2](docs/images/dashboard-runtime-v1.2.2.png)
 
 Die Abbildung ist eine echte Laufzeitaufnahme der installierten
-stabilen Version `v1.2.0` auf ISPConfig 3.3.1p1. Sie ist kein Konzept-Rendering.
+stabilen Version `v1.2.2` auf ISPConfig 3.3.1p1. Sie ist kein Konzept-Rendering.
 
 Weitere echte Laufzeitaufnahmen:
 
-- [Login](docs/images/login-runtime-v1.2.0.png)
-- [Tabellenansicht](docs/images/table-runtime-v1.2.0.png)
-- [Formular](docs/images/form-runtime-v1.2.0.png)
-- [Mobile Navigation](docs/images/mobile-navigation-runtime-v1.2.0.png)
+- [Login](docs/images/login-runtime-v1.2.2.png)
+- [Tabellenansicht](docs/images/table-runtime-v1.2.2.png)
+- [Formular](docs/images/form-runtime-v1.2.2.png)
+- [Mobile Navigation](docs/images/mobile-navigation-runtime-v1.2.2.png)
 
 ### Warum NEXT entstanden ist
 
@@ -31,6 +31,8 @@ Desktop, Tablet und Smartphone.
 ### Verbesserungen
 
 - Einheitliche visuelle Hierarchie in den unterstützten Modulen
+- Orientierung am aktuellen Funktionsumfang von ISPConfig 3.3.1p1; nicht mehr
+  unterstützte Altmodule werden bewusst nicht berücksichtigt
 - Kürzere Wege in Navigation und häufigen Aktionen
 - Einheitliche Tabellen, Filter, Seitennavigation und Leerzustände
 - Klar gruppierte Formulare mit konsistenten Aktionen und Validierungen
@@ -94,17 +96,17 @@ NEXT is a responsive light and dark theme for ISPConfig. It unifies navigation,
 tables, filters, forms, feedback and responsive layouts without replacing
 ISPConfig's established permissions, routes or server-side operations.
 
-![NEXT dashboard from installed version 1.2.0](docs/images/dashboard-runtime-v1.2.0.png)
+![NEXT dashboard from installed version 1.2.2](docs/images/dashboard-runtime-v1.2.2.png)
 
-The image is an actual runtime capture of stable version `v1.2.0` on
+The image is an actual runtime capture of stable version `v1.2.2` on
 ISPConfig 3.3.1p1. It is not a concept rendering.
 
 More actual runtime captures:
 
-- [Login](docs/images/login-runtime-v1.2.0.png)
-- [Table view](docs/images/table-runtime-v1.2.0.png)
-- [Form](docs/images/form-runtime-v1.2.0.png)
-- [Mobile navigation](docs/images/mobile-navigation-runtime-v1.2.0.png)
+- [Login](docs/images/login-runtime-v1.2.2.png)
+- [Table view](docs/images/table-runtime-v1.2.2.png)
+- [Form](docs/images/form-runtime-v1.2.2.png)
+- [Mobile navigation](docs/images/mobile-navigation-runtime-v1.2.2.png)
 
 ### Why NEXT was created
 
@@ -117,6 +119,8 @@ and the same interaction patterns work on desktop, tablet and mobile.
 ### Improvements
 
 - Consistent visual hierarchy across supported modules
+- Aligned with the current ISPConfig 3.3.1p1 feature set; retired legacy
+  modules are intentionally excluded
 - Shorter paths through navigation and frequent actions
 - Unified tables, filters, pagination and empty states
 - Clearly grouped forms with consistent actions and validation

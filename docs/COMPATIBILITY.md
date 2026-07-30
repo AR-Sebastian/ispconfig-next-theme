@@ -12,6 +12,14 @@
 
 ## Validation scope
 
+### Retired ISPConfig integrations
+
+NEXT does not design or validate XMPP, OpenVZ, APS Installer or Mailman 2
+surfaces. These historical ISPConfig integrations are outside the supported
+feature set targeted by this theme. Legacy links emitted by older shared
+interface code are suppressed by the theme and are not presented as supported
+product functionality.
+
 Each release is checked for:
 
 - a complete standalone theme directory;

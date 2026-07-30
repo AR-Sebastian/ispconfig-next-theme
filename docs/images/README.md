@@ -1,6 +1,10 @@
 # Runtime screenshots
 
-Only screenshots captured from a tagged public release may be stored in this directory. Each image must identify the theme version, operating system, web server, color scheme and viewport in the corresponding release documentation.
+Only screenshots captured from an installed public release may be stored in this
+directory. The `v1.2.2` series was captured from ISPConfig `3.3.1p1` on Ubuntu
+24.04 with Apache. Desktop captures use 1440 × 1024; the mobile navigation uses
+390 × 844. The images show the real installed NEXT theme and are not renders or
+mockups.
 
 ## Verified captures
 

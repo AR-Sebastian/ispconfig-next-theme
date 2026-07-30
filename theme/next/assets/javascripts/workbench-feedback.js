@@ -121,6 +121,39 @@
     return alert;
   }
 
+  function runtimeMessage(message) {
+    var text = String(message || '').trim();
+    var messages = [
+      [/^Navigation request was not successful\./, 'Die Seite konnte nicht geladen werden. Bitte versuchen Sie es erneut.', 'The page could not be loaded. Please try again.'],
+      [/^Form request was not successful\./, 'Das Formular konnte nicht gesendet werden. Bitte versuchen Sie es erneut.', 'The form could not be submitted. Please try again.'],
+      [/^Save request was not successful\./, 'Die Änderungen konnten nicht gespeichert werden. Bitte versuchen Sie es erneut.', 'The changes could not be saved. Please try again.'],
+      [/^Upload request was not successful\./, 'Die Datei konnte nicht hochgeladen werden. Bitte versuchen Sie es erneut.', 'The file could not be uploaded. Please try again.'],
+      [/^Module request was not successful\./, 'Das Modul konnte nicht geöffnet werden. Bitte versuchen Sie es erneut.', 'The module could not be opened. Please try again.'],
+      [/^Refresh request was not successful\./, 'Die Ansicht konnte nicht aktualisiert werden.', 'The view could not be refreshed.'],
+      [/^(?:(?:Side|Top) navigation|Navigation menu) request was not successful\./, 'Die Navigation konnte nicht vollständig geladen werden.', 'The navigation could not be loaded completely.'],
+      [/^Session expired\./, 'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.', 'Your session has expired. Please sign in again.'],
+      [/^Workbench enhancement skipped:/, 'Ein Teil dieser Ansicht konnte nicht vollständig dargestellt werden.', 'Part of this view could not be displayed completely.']
+    ];
+    for (var index = 0; index < messages.length; index += 1) {
+      if (messages[index][0].test(text)) return localized(messages[index][1], messages[index][2]);
+    }
+    return localized('Die Aktion konnte nicht abgeschlossen werden. Bitte versuchen Sie es erneut.', 'The action could not be completed. Please try again.');
+  }
+
+  function hasAuthoritativeError(host) {
+    return Boolean(host && host.querySelector(
+      '.wb-content-state--error, ' +
+      '.wb-submit-feedback[data-state="failed"], ' +
+      '.alert-danger:not([data-workbench-generated-feedback])'
+    ));
+  }
+
+  function report(message) {
+    var host = document.getElementById('pageContent');
+    if (!host || hasAuthoritativeError(host)) return null;
+    return show(runtimeMessage(message), 'danger');
+  }
+
   function start() {
     enhance(document);
     var page = document.getElementById('pageContent');
@@ -138,6 +171,6 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
   else start();
 
-  window.workbenchFeedback = { enhance: enhance, show: show };
+  window.workbenchFeedback = { enhance: enhance, show: show, report: report };
   window.workbenchFeedbackInstalled = true;
 }(window, document));

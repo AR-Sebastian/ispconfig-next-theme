@@ -1119,6 +1119,10 @@
 
     reportError: function(message) {
       if (window.console && console.warn) console.warn(message);
+      if (window.workbenchFeedback && typeof window.workbenchFeedback.report === 'function') {
+        return window.workbenchFeedback.report(message);
+      }
+      return null;
     },
 
     notify: function(message, state) {

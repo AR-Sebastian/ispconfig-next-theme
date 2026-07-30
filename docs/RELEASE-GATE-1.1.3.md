@@ -13,10 +13,10 @@ evidence. Published tags are immutable.
 
 ## Roles and interface
 
-- Administrator login and representative modules
-- Reseller tenant boundaries and navigation
-- Customer tenant boundaries and navigation
-- Mail-user login and permitted views
+- Administrator login and representative modules: passed on Apache and Nginx
+- Reseller navigation and protected-route boundaries: passed on Apache and Nginx
+- Customer navigation and protected-route boundaries: passed on Apache and Nginx
+- Mail-user login and permitted views: passed on Apache and Nginx
 - Login, dashboard, table, filter, form, dialog and mobile navigation
 - Light and dark schemes
 

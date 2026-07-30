@@ -35,6 +35,11 @@ Apache and Nginx,
 authenticated administrator login, actual NEXT selection without fallback
 and all 47 theme assets referenced by each rendered dashboard.
 
-This is candidate evidence, not yet a public compatibility claim. The
-reseller, customer and mail-user views plus the visual browser matrix must
-still pass before the candidate can be merged and tagged.
+Authenticated administrator, reseller, customer and mail-user sessions also
+passed on Debian 12 with Apache and Nginx. Required and forbidden navigation
+modules, representative protected routes, default-theme fallback and all 47
+referenced assets were checked for every role.
+
+This is candidate evidence, not yet a public compatibility claim. The visual
+browser, responsive and screenshot matrix must still pass before the candidate
+can be merged and tagged.

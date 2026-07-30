@@ -314,7 +314,7 @@
         actionGroup = document.createElement('div');
         actionGroup.className = 'wb-page-header__actions';
         actionGroup.setAttribute('role', 'group');
-        actionGroup.setAttribute('aria-label', (header.querySelector('h1')?.textContent || 'Page') + ' actions');
+        actionGroup.setAttribute('aria-label', (header.querySelector('h1')?.textContent || localized('Seite', 'Page')) + ' ' + localized('Aktionen', 'actions'));
         directActions.forEach(function(action) {
           action.classList.add('wb-page-header__action');
           actionGroup.appendChild(action);
@@ -931,7 +931,7 @@
     Array.prototype.forEach.call(host.querySelectorAll('input[type="submit"], input[type="button"], button, a.btn, .btn'), function(control) {
       var label = (control.value || control.textContent || control.getAttribute('aria-label') || control.title || '').replace(/\s+/g, ' ').trim();
       if (label && !control.getAttribute('aria-label') && /^(?:\+|>|<|»|«|→|←)$/.test(label)) {
-        control.setAttribute('aria-label', document.body.dataset.workbenchGenericAction || 'Aktion ausführen');
+        control.setAttribute('aria-label', document.body.dataset.workbenchGenericAction || localized('Aktion ausführen', 'Perform action'));
       }
       if (/^(?:reset filters|filter zurücksetzen|filter zur\u00fccksetzen)$/i.test(label)) control.classList.add('wb-control--filter-reset');
       if (/^(?:show filters|filter anzeigen|filter einblenden)$/i.test(label)) control.classList.add('wb-control--filter-toggle');
@@ -940,7 +940,7 @@
     Array.prototype.forEach.call(host.querySelectorAll('.pagination, .pager'), function(pagination) {
       pagination.classList.add('wb-pagination');
       var nav = pagination.closest('nav');
-      if (nav && !nav.getAttribute('aria-label')) nav.setAttribute('aria-label', document.body.dataset.workbenchPagination || 'Pagination');
+      if (nav && !nav.getAttribute('aria-label')) nav.setAttribute('aria-label', document.body.dataset.workbenchPagination || localized('Seitennavigation', 'Pagination'));
     });
   }
 
@@ -1075,7 +1075,7 @@
       if (!summary) {
         summary = document.createElement('div');
         summary.className = 'wb-form-section-summary';
-        summary.setAttribute('aria-label', document.body.dataset.workbenchFormSectionSummary || 'Form section summary');
+        summary.setAttribute('aria-label', document.body.dataset.workbenchFormSectionSummary || localized('Zusammenfassung des Formularabschnitts', 'Form section summary'));
         var heading = section.querySelector(':scope > .wb-form-section-heading, :scope > legend, :scope > .fieldset-legend');
         if (heading && heading.parentNode === section) {
           if (heading.nextSibling) section.insertBefore(summary, heading.nextSibling);
@@ -1216,7 +1216,7 @@
       if (!actions.querySelector('.btn, button, input[type="button"], input[type="submit"]')) return;
       actions.classList.add('wb-form-actions');
       actions.setAttribute('role', 'group');
-      actions.setAttribute('aria-label', document.body.dataset.workbenchFormActions || 'Form actions');
+      actions.setAttribute('aria-label', document.body.dataset.workbenchFormActions || localized('Formularaktionen', 'Form actions'));
       var hasDangerAction = false;
       Array.prototype.forEach.call(actions.querySelectorAll('.btn, button, input[type="button"], input[type="submit"], a.formbutton-success, a.formbutton-default, a.formbutton-danger'), function(action) {
         var tone = 'secondary';
@@ -1287,7 +1287,7 @@
       control.setAttribute('data-wb-action-tone', tone);
       control.classList.toggle('wb-action-control--icon', iconOnly);
       if (!control.getAttribute('aria-label') && !visibleText) {
-        control.setAttribute('aria-label', control.getAttribute('title') || document.body.dataset.workbenchTableActions || 'Action');
+        control.setAttribute('aria-label', control.getAttribute('title') || document.body.dataset.workbenchTableActions || localized('Aktion', 'Action'));
       }
     });
   }

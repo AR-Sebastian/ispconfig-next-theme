@@ -3,6 +3,11 @@
 
   var codeFieldPattern = /(?:config|directive|rules?|template|snippet|php_ini|ssl_(?:key|cert|bundle|request)|ssh_rsa|dkim_(?:private|public)|dns_record|custom_mailfilter)/i;
 
+  function localized(german, english) {
+    var language = typeof window.workbenchLanguage === 'function' ? window.workbenchLanguage() : (document.documentElement.lang || '');
+    return String(language).toLowerCase().indexOf('de') === 0 ? german : english;
+  }
+
   function createBadge(label, value, modifier) {
     var badge = document.createElement('span');
     badge.className = 'wb-specialty-badge' + (modifier ? ' wb-specialty-badge--' + modifier : '');
@@ -33,9 +38,9 @@
       if (hero && !hero.querySelector('.wb-specialty-badges')) {
         var badges = document.createElement('div');
         badges.className = 'wb-specialty-badges';
-        badges.appendChild(createBadge('Einträge', rows.length, 'records'));
-        if (actions > 0) badges.appendChild(createBadge('Aktionen', actions, 'actions'));
-        if (dangerActions > 0) badges.appendChild(createBadge('Kritisch', dangerActions, 'danger'));
+        badges.appendChild(createBadge(localized('Einträge', 'Entries'), rows.length, 'records'));
+        if (actions > 0) badges.appendChild(createBadge(localized('Aktionen', 'Actions'), actions, 'actions'));
+        if (dangerActions > 0) badges.appendChild(createBadge(localized('Kritisch', 'Critical'), dangerActions, 'danger'));
         hero.appendChild(badges);
       }
 
@@ -58,8 +63,8 @@
       if (hero && !hero.querySelector('.wb-specialty-badges')) {
         var badges = document.createElement('div');
         badges.className = 'wb-specialty-badges';
-        if (states > 0) badges.appendChild(createBadge('Status', states, 'records'));
-        if (charts > 0) badges.appendChild(createBadge('Diagramme', charts, 'actions'));
+        if (states > 0) badges.appendChild(createBadge(localized('Status', 'Status'), states, 'records'));
+        if (charts > 0) badges.appendChild(createBadge(localized('Diagramme', 'Charts'), charts, 'actions'));
         hero.appendChild(badges);
       }
 
@@ -69,7 +74,9 @@
         if (select && !panel.querySelector('.wb-specialty-control-hint')) {
           var hint = document.createElement('span');
           hint.className = 'wb-specialty-control-hint';
-          hint.textContent = select.value ? 'Automatische Aktualisierung aktiv' : 'Manuelle Aktualisierung';
+          hint.textContent = select.value
+            ? localized('Automatische Aktualisierung aktiv', 'Automatic refresh active')
+            : localized('Manuelle Aktualisierung', 'Manual refresh');
           panel.appendChild(hint);
         }
       });

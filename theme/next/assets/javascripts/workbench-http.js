@@ -127,7 +127,10 @@
       body: body.toString(),
       signal: controller ? controller.signal : undefined
     };
-    handle.promise = fetchWithRetry(url, init, handle, options.retries === undefined ? 1 : Number(options.retries) || 0).then(function(response) {
+    // Mutating requests are never retried implicitly. A lost response does not
+    // prove that the server rejected the first write, so repeating it could
+    // create duplicate records or execute an action twice.
+    handle.promise = fetchWithRetry(url, init, handle, options.retries === undefined ? 0 : Number(options.retries) || 0).then(function(response) {
       if (!response.ok) throw new HttpError('HTTP ' + response.status, response.status, url.href);
       return response.text();
     }).then(function(payload) {

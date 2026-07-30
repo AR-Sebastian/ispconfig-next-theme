@@ -121,6 +121,24 @@
     return alert;
   }
 
+  function connectivityFeedback(online) {
+    var host = document.getElementById('pageContent');
+    if (!host) return null;
+    var current = host.querySelector('[data-workbench-connectivity-feedback]');
+    if (current) current.remove();
+    if (online) {
+      var restored = show(localized('Verbindung wiederhergestellt.', 'Connection restored.'), 'success');
+      if (restored) restored.setAttribute('data-workbench-connectivity-feedback', 'online');
+      return restored;
+    }
+    var offline = show(
+      localized('Keine Netzwerkverbindung. Lesevorgänge können nach dem Wiederherstellen der Verbindung erneut versucht werden.', 'No network connection. Read operations can be retried after the connection is restored.'),
+      'warning'
+    );
+    if (offline) offline.setAttribute('data-workbench-connectivity-feedback', 'offline');
+    return offline;
+  }
+
   function runtimeMessage(message) {
     var text = String(message || '').trim();
     var messages = [
@@ -151,11 +169,15 @@
   function report(message) {
     var host = document.getElementById('pageContent');
     if (!host || hasAuthoritativeError(host)) return null;
+    if (window.navigator && window.navigator.onLine === false) return connectivityFeedback(false);
     return show(runtimeMessage(message), 'danger');
   }
 
   function start() {
     enhance(document);
+    window.addEventListener('offline', function() { connectivityFeedback(false); });
+    window.addEventListener('online', function() { connectivityFeedback(true); });
+    if (window.navigator && window.navigator.onLine === false) connectivityFeedback(false);
     var page = document.getElementById('pageContent');
     if (page && window.MutationObserver) {
       new MutationObserver(function (records) {
@@ -171,6 +193,6 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
   else start();
 
-  window.workbenchFeedback = { enhance: enhance, show: show, report: report };
+  window.workbenchFeedback = { enhance: enhance, show: show, report: report, connectivity: connectivityFeedback };
   window.workbenchFeedbackInstalled = true;
 }(window, document));

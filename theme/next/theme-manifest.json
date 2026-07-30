@@ -2,15 +2,15 @@
     "schemaVersion":  1,
     "id":  "com.ispconfig.next.theme",
     "name":  "ISPConfig NEXT",
-    "version":  "1.1.2",
+    "version":  "1.1.3",
     "stage":  "evaluation",
     "releaseDate":  "2026-07-30",
     "compatibility":  {
-                          "ispconfig":  "3.3dev",
-                          "preview":  "Development-line evaluation only; stable 3.3.1p1 validation pending"
+                          "ispconfig":  "3.3.1p1",
+                          "preview":  "Release candidate under stable 3.3.1p1 matrix validation"
                       },
     "packageDirectory":  "next",
-    "releaseTag":  "v1.1.2",
+    "releaseTag":  "v1.1.3",
     "supportedModules":  [
                              "login",
                              "dashboard",

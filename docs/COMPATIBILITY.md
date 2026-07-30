@@ -28,9 +28,12 @@ Server provisioning remains controlled by ISPConfig. The theme does not replace 
 
 ## Stable 3.3.1p1 release gate
 
-NEXT does not currently claim compatibility with ISPConfig 3.3.1p1. The
-`ispconfig_version` and `ISPC_VERSION` files remain at `3.3dev` until the
-overridden templates have passed the stable-release matrix. The planned
-`v1.1.3` package will name `3.3.1p1` only after administrator, reseller,
-customer and mail-user views have been verified on clean Apache and Nginx
-installations. Changing only the version marker is not accepted as proof.
+The `release/v1.1.3` candidate names ISPConfig `3.3.1p1` so it can be tested
+without ISPConfig falling back to the default theme. It has passed a clean
+Ubuntu 22.04/Nginx installation, authenticated administrator login, actual
+NEXT selection without fallback and all 47 theme assets referenced by the
+dashboard.
+
+This is candidate evidence, not yet a public compatibility claim. Apache,
+the remaining distributions and the reseller, customer and mail-user views
+must still pass before the candidate can be merged and tagged.

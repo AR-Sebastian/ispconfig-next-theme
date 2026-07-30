@@ -358,7 +358,7 @@
     var declared = (document.documentElement.lang || '').toLowerCase();
     var primary = document.querySelector('#main-navigation');
     var footer = document.querySelector('.wb-app-navigation__footer');
-    return declared.indexOf('de') === 0 || /\u00fcbersicht|kunden|webseiten|\u00fcberwachung|einstellungen/i.test(primary ? primary.textContent : '') || /ispconfig workbench/i.test(footer ? footer.textContent : '');
+    return declared.indexOf('de') === 0 || /\u00fcbersicht|kunden|webseiten|\u00fcberwachung|einstellungen/i.test(primary ? primary.textContent : '') || /ispconfig next/i.test(footer ? footer.textContent : '');
   }
 
   function navigationResource(link, suffix) {

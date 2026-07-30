@@ -945,12 +945,40 @@
     }
   }
 
+  function suppressRetiredXmppPresentation(host) {
+    if (!host) return;
+
+    Array.prototype.forEach.call(host.querySelectorAll('[name="xmpp_server"]'), function(control) {
+      var group = control.closest('.form-group, .wb-field-group, tr');
+      if (!group) return;
+      group.hidden = true;
+      group.setAttribute('aria-hidden', 'true');
+      group.dataset.wbRetiredFeature = 'xmpp';
+    });
+
+    Array.prototype.forEach.call(host.querySelectorAll('table'), function(table) {
+      var headers = Array.prototype.slice.call(table.querySelectorAll('thead > tr:first-child > th, thead > tr:first-child > td'));
+      headers.forEach(function(header, columnIndex) {
+        var label = (header.textContent || '').replace(/\s+/g, ' ').trim();
+        if (!/^xmpp(?:\s+server)?$/i.test(label)) return;
+        Array.prototype.forEach.call(table.querySelectorAll('tr'), function(row) {
+          var cell = row.children[columnIndex];
+          if (!cell) return;
+          cell.hidden = true;
+          cell.setAttribute('aria-hidden', 'true');
+          cell.dataset.wbRetiredFeature = 'xmpp';
+        });
+      });
+    });
+  }
+
   function enhanceLoadedContent(host, pageName, params, context) {
     if (!host) return;
     runEnhancementStep('page context', function() { decoratePageContext(host, pageName); });
     runEnhancementStep('page chrome', function() { decoratePageChrome(host, pageName); });
     runEnhancementStep('information architecture', function() { decorateInformationArchitecture(host); });
     runEnhancementStep('legacy fragments before controls', function() { normalizeResidualLegacyFragments(host); });
+    runEnhancementStep('retired feature presentation', function() { suppressRetiredXmppPresentation(host); });
     runEnhancementStep('table filters', function() { decorateTableFilters(host); });
     runEnhancementStep('page size controls', function() { normalizePageSizeControls(host); });
     runEnhancementStep('list command bar', function() { decorateListCommandBar(host); });

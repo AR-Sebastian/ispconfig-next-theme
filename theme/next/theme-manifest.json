@@ -45,7 +45,7 @@
                    },
     "distributionMode":  "standalone-theme",
     "optionalIntegration":  {
-                                "Name":  "ISPConfig Workbench branding",
+                                "Name":  "ISPConfig NEXT branding",
                                 "Required":  false,
                                 "BehaviorWithoutIntegration":  "Theme-local ISPConfig logo, favicon and red accent defaults"
                             }

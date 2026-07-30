@@ -7,10 +7,17 @@ Navigation, Tabellen, Filter, Formulare, Rückmeldungen und responsive Ansichten
 ohne die bewährten Berechtigungen, Routen oder Serveraktionen von ISPConfig zu
 ersetzen.
 
-![NEXT-Dashboard aus dem installierten Paket v1.1.2](docs/images/dashboard-runtime-v1.1.2.png)
+![NEXT-Dashboard des installierten v1.1.3-Kandidaten](docs/images/dashboard-runtime-v1.1.3.png)
 
-Die Abbildung ist eine echte Laufzeitaufnahme des veröffentlichten Pakets
-`v1.1.2` auf Ubuntu 24.04 mit Nginx. Sie ist kein Konzept-Rendering.
+Die Abbildung ist eine echte Laufzeitaufnahme des installierten
+`v1.1.3`-Kandidaten auf ISPConfig 3.3.1p1. Sie ist kein Konzept-Rendering.
+
+Weitere echte Laufzeitaufnahmen:
+
+- [Login](docs/images/login-runtime-v1.1.3.png)
+- [Tabelle mit geöffneten Filtern](docs/images/table-filters-runtime-v1.1.3.png)
+- [Formular](docs/images/form-runtime-v1.1.3.png)
+- [Mobile Navigation](docs/images/mobile-navigation-runtime-v1.1.3.png)
 
 ### Warum NEXT entstanden ist
 
@@ -85,10 +92,17 @@ NEXT is a responsive light and dark theme for ISPConfig. It unifies navigation,
 tables, filters, forms, feedback and responsive layouts without replacing
 ISPConfig's established permissions, routes or server-side operations.
 
-![NEXT dashboard from the installed v1.1.2 package](docs/images/dashboard-runtime-v1.1.2.png)
+![NEXT dashboard from the installed v1.1.3 candidate](docs/images/dashboard-runtime-v1.1.3.png)
 
-The image is an actual runtime capture of the published `v1.1.2` package on
-Ubuntu 24.04 with Nginx. It is not a concept rendering.
+The image is an actual runtime capture of the installed `v1.1.3` candidate on
+ISPConfig 3.3.1p1. It is not a concept rendering.
+
+More actual runtime captures:
+
+- [Login](docs/images/login-runtime-v1.1.3.png)
+- [Table with expanded filters](docs/images/table-filters-runtime-v1.1.3.png)
+- [Form](docs/images/form-runtime-v1.1.3.png)
+- [Mobile navigation](docs/images/mobile-navigation-runtime-v1.1.3.png)
 
 ### Why NEXT was created
 

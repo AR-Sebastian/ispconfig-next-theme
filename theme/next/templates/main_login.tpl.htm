@@ -30,37 +30,37 @@
   <aside class="wb-login-hero">
     <div class="wb-login-hero__logo"><img src="<tmpl_var name='base64_logo_txt'>" alt="Interface logo"></div>
     <div class="wb-login-hero__copy">
-      <div class="wb-login-hero__kicker">Sicherer Zugang</div>
-      <h1>Deine Server.<br>Ein klarer<br>Einstieg.</h1>
-      <p>Ein moderner, fokussierter Einstieg in deine zentrale Serververwaltung.</p>
+      <div class="wb-login-hero__kicker" data-wb-i18n="hero_kicker">Sicherer Zugang</div>
+      <h1 data-wb-i18n="hero_title">Deine Server.<br>Ein klarer<br>Einstieg.</h1>
+      <p data-wb-i18n="hero_intro">Ein moderner, fokussierter Einstieg in deine zentrale Serververwaltung.</p>
       <ul>
-        <li>Zentrale Verwaltung deiner Dienste</li>
-        <li>Gesch&uuml;tzte Anmeldung mit Zwei-Faktor-Pr&uuml;fung</li>
-        <li>Optimiert f&uuml;r Desktop, Tablet und Smartphone</li>
+        <li data-wb-i18n="hero_service">Zentrale Verwaltung deiner Dienste</li>
+        <li data-wb-i18n="hero_security">Gesch&uuml;tzte Anmeldung mit Zwei-Faktor-Pr&uuml;fung</li>
+        <li data-wb-i18n="hero_responsive">Optimiert f&uuml;r Desktop, Tablet und Smartphone</li>
       </ul>
     </div>
     <div class="wb-login-hero__footer">
       <span class="wb-login-hero__status" aria-hidden="true"></span>
-      <small>Private ISPConfig Workbench &middot; gesch&uuml;tzte Testumgebung</small>
+      <small data-wb-i18n="hero_footer">ISPConfig NEXT &middot; sichere Serververwaltung</small>
     </div>
   </aside>
   <section class="wb-login-card" aria-labelledby="wb-login-title">
-    <button type="button" class="wb-theme-toggle wb-login-theme-toggle" aria-label="Switch to dark theme"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.7 15.3A8.5 8.5 0 0 1 8.7 3.3 8.5 8.5 0 1 0 20.7 15.3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    <div class="wb-login-badge">ISPConfig Workbench</div>
-    <h2 id="wb-login-title">Willkommen zur&uuml;ck</h2>
-    <p class="wb-login-subtitle">Melde dich an deiner Testumgebung an.</p>
+    <button type="button" class="wb-theme-toggle wb-login-theme-toggle" aria-label="Zum dunklen Design wechseln" data-wb-i18n-aria-label="theme_toggle"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.7 15.3A8.5 8.5 0 0 1 8.7 3.3 8.5 8.5 0 1 0 20.7 15.3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div class="wb-login-badge">ISPConfig NEXT</div>
+    <h2 id="wb-login-title" data-wb-i18n="welcome">Willkommen zur&uuml;ck</h2>
+    <p class="wb-login-subtitle" data-wb-i18n="login_intro">Melde dich sicher an deiner Serververwaltung an.</p>
     <div class="wb-login-form-surface">
       <tmpl_dyninclude name="content_tpl">
     </div>
-    <div class="wb-login-security" aria-label="Sicherheitshinweis">
+    <div class="wb-login-security" aria-label="Sicherheitshinweis" data-wb-i18n-aria-label="security_label">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5.5 5.8v5.1c0 4.3 2.7 8.1 6.5 9.6 3.8-1.5 6.5-5.3 6.5-9.6V5.8L12 3Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m9.2 12 1.8 1.8 3.8-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <span>Zugangsdaten werden nur an diese ISPConfig-Instanz &uuml;bertragen.</span>
+      <span data-wb-i18n="security_note">Zugangsdaten werden nur an diese ISPConfig-Instanz &uuml;bertragen.</span>
     </div>
     <div class="wb-login-disclaimer"><small><tmpl_var name="custom_login"></small></div>
   </section>
 </main>
   <script src='../themes/next/assets/javascripts/workbench-feedback.js?ver=3'></script>
-  <script src='../themes/next/assets/javascripts/workbench-login.js?ver=8'></script>
+  <script src='../themes/next/assets/javascripts/workbench-login.js?ver=9'></script>
   <script src='../themes/next/assets/javascripts/workbench-theme.js?ver=14'></script>
 </body>
 

@@ -49,6 +49,9 @@ Test the theme on a staging system before using it in production.
 ## Project information
 
 - [Changelog](CHANGELOG.md)
+- [Compatibility and validation](docs/COMPATIBILITY.md)
+- [Branding guide](docs/BRANDING-DE.md)
+- [Release process](docs/RELEASE-PROCESS.md)
 - [Security policy](SECURITY.md)
 - [Contributing](CONTRIBUTING.md)
 

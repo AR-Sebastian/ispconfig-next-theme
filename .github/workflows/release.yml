@@ -22,7 +22,7 @@ jobs:
       - name: Build assets
         run: bash scripts/build-release.sh
       - name: Publish assets
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: |
             dist/ispconfig-next-theme-*.zip

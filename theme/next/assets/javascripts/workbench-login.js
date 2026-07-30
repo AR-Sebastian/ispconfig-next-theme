@@ -23,61 +23,6 @@
     }
   }
 
-  function localizeThemeCopy() {
-    var username = document.getElementById('username');
-    var login = document.querySelector('.wb-auth-actions input[type="submit"]');
-    var languageProbe = ((username && username.getAttribute('placeholder')) || '') + ' ' + ((login && login.value) || '');
-    var language = /benutzer|anmeld|passwort/i.test(languageProbe) ? 'de' : 'en';
-    var copy = {
-      de: {
-        hero_kicker: 'Sicherer Zugang',
-        hero_title: 'Deine Server.<br>Ein klarer<br>Einstieg.',
-        hero_intro: 'Ein moderner, fokussierter Einstieg in deine zentrale Serververwaltung.',
-        hero_service: 'Zentrale Verwaltung deiner Dienste',
-        hero_security: 'Geschützte Anmeldung mit Zwei-Faktor-Prüfung',
-        hero_responsive: 'Optimiert für Desktop, Tablet und Smartphone',
-        hero_footer: 'ISPConfig NEXT · sichere Serververwaltung',
-        welcome: 'Willkommen zurück',
-        login_intro: 'Melde dich sicher an deiner Serververwaltung an.',
-        security_label: 'Sicherheitshinweis',
-        security_note: 'Zugangsdaten werden nur an diese ISPConfig-Instanz übertragen.',
-        remember_username: 'Benutzername merken',
-        remember_hint: 'Auf diesem Gerät wird nur der Benutzername gespeichert.',
-        password_manager: 'Dein Passwortmanager kann das Passwort sicher speichern.',
-        theme_toggle: 'Darstellung wechseln'
-      },
-      en: {
-        hero_kicker: 'Secure access',
-        hero_title: 'Your servers.<br>One clear<br>entry point.',
-        hero_intro: 'A modern, focused entry point for your central server administration.',
-        hero_service: 'Central administration of your services',
-        hero_security: 'Protected sign-in with two-factor authentication',
-        hero_responsive: 'Optimized for desktop, tablet and smartphone',
-        hero_footer: 'ISPConfig NEXT · secure server administration',
-        welcome: 'Welcome back',
-        login_intro: 'Sign in securely to your server administration.',
-        security_label: 'Security notice',
-        security_note: 'Credentials are transmitted only to this ISPConfig instance.',
-        remember_username: 'Remember username',
-        remember_hint: 'Only the username is stored on this device.',
-        password_manager: 'Your password manager can securely store the password.',
-        theme_toggle: 'Change appearance'
-      }
-    }[language];
-
-    document.documentElement.lang = language;
-    Array.prototype.forEach.call(document.querySelectorAll('[data-wb-i18n]'), function(node) {
-      var key = node.getAttribute('data-wb-i18n');
-      if (!Object.prototype.hasOwnProperty.call(copy, key)) return;
-      if (key === 'hero_title') node.innerHTML = copy[key];
-      else node.textContent = copy[key];
-    });
-    Array.prototype.forEach.call(document.querySelectorAll('[data-wb-i18n-aria-label]'), function(node) {
-      var key = node.getAttribute('data-wb-i18n-aria-label');
-      if (Object.prototype.hasOwnProperty.call(copy, key)) node.setAttribute('aria-label', copy[key]);
-    });
-  }
-
   function normalizeFeedback() {
     var surface = document.querySelector('.wb-login-form-surface');
     if (!surface) return;
@@ -129,7 +74,6 @@
     var stay = document.getElementById('stay');
     var card = document.querySelector('.wb-login-card');
 
-    localizeThemeCopy();
     normalizeFeedback();
     observeFeedback();
 

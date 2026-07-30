@@ -6,7 +6,7 @@
   // statistics widgets into a single extremely tall grid track after login.
   // The storage key stays stable; the revision deliberately resets only the
   // incompatible geometry while preserving the public layout contract.
-  var LAYOUT_REVISION = 'curated-default-v2';
+  var LAYOUT_REVISION = 'premium-density-v3';
   var sizes = ['1x1', '1x2', '2x2'];
   var defaults = {
     modules: '2x2',
@@ -140,72 +140,7 @@
   function normalizeServerDashlets(host) {
     var boundary = host.querySelector(':scope > [data-wb-dashboard-server-content]');
     if (!boundary) return;
-
-    function wrap(nodes, name) {
-      nodes = nodes.filter(Boolean);
-      if (!nodes.length) return null;
-      var section = document.createElement('section');
-      section.className = 'wb-dashlet wb-dashlet-' + name;
-      section.setAttribute('data-wb-dashlet', name);
-      boundary.insertBefore(section, nodes[0]);
-      nodes.forEach(function (node) { section.appendChild(node); });
-      return section;
-    }
-
-    function directChild(node) {
-      while (node && node.parentElement !== boundary) node = node.parentElement;
-      return node && node.parentElement === boundary ? node : null;
-    }
-
     var widgets = Array.prototype.slice.call(boundary.children).filter(function (node) {
-      return node.classList && node.classList.contains('wb-dashlet');
-    });
-    widgets.forEach(function (node) {
-      boundary.insertAdjacentElement('beforebegin', node);
-    });
-
-    // Stock ISPConfig 3.3.1p1 renders dashboard dashlets as unlabelled sibling
-    // fragments. A standalone theme cannot rely on a controller-side wrapper,
-    // so classify the stable structural contracts before applying the layout.
-    // This keeps the package theme-only while preserving every server-rendered
-    // field, link, chart payload and permission decision.
-    var donate = boundary.querySelector(':scope > div .wb-donate-card, :scope > div[data-workbench-disclosure]');
-    if (donate) {
-      var donateRoot = directChild(donate) || donate;
-      var donateScript = donateRoot.nextElementSibling;
-      wrap([donateRoot, donateScript && donateScript.tagName === 'SCRIPT' ? donateScript : null], 'donate');
-    }
-
-    var modules = boundary.querySelector(':scope > div ul.modules');
-    if (modules) {
-      var modulesRoot = directChild(modules) || modules;
-      var modulesHeading = modulesRoot.previousElementSibling;
-      wrap([
-        modulesHeading && /^H[1-6]$/.test(modulesHeading.tagName) ? modulesHeading : null,
-        modulesRoot
-      ], 'modules');
-    }
-
-    var metrics = boundary.querySelector(':scope > div canvas[id$="chart"]');
-    if (metrics) {
-      var metricsRoot = directChild(metrics) || metrics;
-      var metricsScript = metricsRoot.nextElementSibling;
-      wrap([metricsRoot, metricsScript && metricsScript.tagName === 'SCRIPT' ? metricsScript : null], 'metrics');
-    }
-
-    Array.prototype.slice.call(boundary.querySelectorAll(':scope > .table-wrapper')).forEach(function (tableRoot) {
-      var name = 'limits';
-      if (tableRoot.querySelector('a[data-load-content*="database_edit"]')) name = 'databasequota';
-      else if (tableRoot.querySelector('a[data-load-content*="mail_user_edit"]')) name = 'mailquota';
-      else if (tableRoot.querySelector('a[data-load-content*="web_vhost_domain_edit"]')) name = 'quota';
-      var footer = tableRoot.nextElementSibling;
-      wrap([
-        tableRoot,
-        footer && footer.matches('.wb-list-footer, .wb-table-footer') ? footer : null
-      ], name);
-    });
-
-    widgets = Array.prototype.slice.call(boundary.children).filter(function (node) {
       return node.classList && node.classList.contains('wb-dashlet');
     });
     widgets.forEach(function (node) {

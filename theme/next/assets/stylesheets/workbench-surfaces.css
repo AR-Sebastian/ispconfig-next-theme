@@ -364,7 +364,7 @@ body.wb-app-navigation-enabled .nav-tabs > li > a:focus-visible {
 body.wb-app-navigation-enabled .nav-tabs > li.active > a,
 body.wb-app-navigation-enabled .nav-tabs > li.active > a:hover,
 body.wb-app-navigation-enabled .nav-tabs > li.active > a:focus {
-  color: var(--wb-action);
+  color: var(--wb-action-quiet-text);
   border-color: var(--wb-border) var(--wb-border) var(--wb-surface);
   background-color: var(--wb-surface);
 }
@@ -372,7 +372,7 @@ body.wb-app-navigation-enabled .nav-tabs > li.active > a:focus {
 body.wb-app-navigation-enabled .nav-pills > li.active > a,
 body.wb-app-navigation-enabled .nav-pills > li.active > a:hover,
 body.wb-app-navigation-enabled .nav-pills > li.active > a:focus {
-  color: var(--wb-action);
+  color: var(--wb-action-quiet-text);
   background: color-mix(in srgb, var(--wb-action) 9%, var(--wb-surface));
 }
 
@@ -938,7 +938,7 @@ body.wb-app-navigation-enabled #pageContent :where(
   .nav-tabs > li > a:hover,
   .nav-tabs > li > a:focus
 ) {
-  color: var(--wb-action);
+  color: var(--wb-action-quiet-text);
   border-color: var(--wb-border);
   background-color: var(--wb-surface);
 }

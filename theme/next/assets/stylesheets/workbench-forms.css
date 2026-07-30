@@ -84,7 +84,7 @@ body.wb-form-page #pageForm.wb-modern-form .content-tab-wrapper > .nav-tabs > li
 }
 
 body.wb-form-page #pageForm.wb-modern-form .content-tab-wrapper > .nav-tabs > li.active > a {
-  color: var(--wb-action);
+  color: var(--wb-action-quiet-text);
   border-color: color-mix(in srgb, var(--wb-action) 44%, var(--wb-border));
   background: color-mix(in srgb, var(--wb-action) 10%, var(--wb-surface));
   box-shadow: inset 0 -3px 0 var(--wb-action), 0 12px 26px color-mix(in srgb, var(--wb-action) 9%, transparent);
@@ -1334,7 +1334,7 @@ body.wb-form-page #pageForm.wb-modern-form .content-tab-wrapper > .nav-tabs > li
 }
 
 body.wb-form-page #pageForm.wb-modern-form .content-tab-wrapper > .nav-tabs > li.active > a {
-  color: var(--wb-action);
+  color: var(--wb-action-quiet-text);
   background: color-mix(in srgb, var(--wb-surface) 94%, var(--wb-action) 3%);
   box-shadow:
     inset 0 -3px 0 var(--wb-action),
@@ -5056,7 +5056,7 @@ body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true']
 }
 
 body.wb-form-page #pageForm.wb-modern-form[data-workbench-form-finalized='true'] .content-tab-wrapper > .nav-tabs > li.active > a {
-  color: var(--wb-action) !important;
+  color: var(--wb-action-quiet-text) !important;
   border-color: color-mix(in srgb, var(--wb-action) 32%, var(--wb-border)) !important;
   background: color-mix(in srgb, var(--wb-action) 9%, var(--wb-surface)) !important;
   box-shadow: inset 0 -0.18rem 0 var(--wb-action) !important;

@@ -1559,8 +1559,8 @@ body.wb-app-navigation-enabled .wb-global-search-results {
 
   body.wb-app-navigation-enabled #inner-wrapper > .clear:first-child {
     --wb-shell-search-submit-size: 42px;
-    grid-template-columns: 42px minmax(0, 1fr) 40px;
-    grid-template-areas: 'brand search actions';
+    grid-template-columns: 42px minmax(0, 1fr);
+    grid-template-areas: 'brand search';
     grid-template-rows: 42px;
     gap: 0.625rem;
     align-items: center;
@@ -1586,11 +1586,6 @@ body.wb-app-navigation-enabled .wb-global-search-results {
   }
 
   body.wb-app-navigation-enabled .wb-header-actions {
-    display: flex !important;
-    inline-size: 40px;
-  }
-
-  body.wb-app-navigation-enabled .wb-header-actions .notification {
     display: none !important;
   }
 

@@ -21,15 +21,17 @@
 							<small>{tmpl_var name='stay_logged_in_hint_txt'}</small>
 							</div>
 						</tmpl_if>
+						<tmpl_if name="workbench_remember_username" value="y">
 						<div class="checkbox wb-login-remember-option">
 							<label>
-								<input name="remember_username" id="remember_username" type="checkbox" value="1" data-wb-remember-username="1"> <span data-wb-i18n="remember_username">Benutzername merken</span>
+								<input name="remember_username" id="remember_username" type="checkbox" value="1" data-wb-remember-username="1"> <span>{tmpl_var name='remember_username_txt'}</span>
 							</label>
-							<small data-wb-i18n="remember_hint">Auf diesem Ger&auml;t wird nur der Benutzername gespeichert.</small>
+							<small>{tmpl_var name='remember_username_hint_txt'}</small>
 							</div>
+						</tmpl_if>
 						<div class="wb-login-password-manager-hint" role="note">
 							<span aria-hidden="true">&#10003;</span>
-							<small data-wb-i18n="password_manager">Dein Passwortmanager kann das Passwort sicher speichern.</small>
+							<small>{tmpl_var name='password_manager_hint_txt'}</small>
 						</div>
 						<input type="hidden" name="s_mod" value="login" />
 						<input type="hidden" name="s_pg" value="index" />

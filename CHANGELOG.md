@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+## 1.2.0 - 2026-07-30
+
+- Promoted the fully validated NEXT release candidate to stable.
+- Completed the eight-profile ISPConfig 3.3.1p1 matrix across Ubuntu 22.04/24.04
+  and Debian 12/13 with Apache and Nginx.
+- Passed 112 runtime checks without default-theme fallback.
+- Completed administrator, reseller, customer and mail-user role isolation.
+- Finalized navigation, dashboard metrics, tables, filters, forms, responsive
+  behavior, theme switching and branding feedback.
+- Verified the standalone package with 300 signed files.
+- Passed fresh installation, upgrade, backup and rollback validation.
+- Strengthened repository validation for version, tag, stage and ISPConfig
+  compatibility consistency.
+
 ## 1.1.4 - 2026-07-30
 
 - Tightened dashboard summary and 1×1 widget density.

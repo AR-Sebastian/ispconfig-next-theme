@@ -43,7 +43,7 @@ Desktop, Tablet und Smartphone.
 
 ### Aktueller Status und Kompatibilität
 
-`v1.1.4` ist die vollständig geprüfte stabile Version:
+`v1.2.0` ist die vollständig geprüfte stabile Version:
 
 - ISPConfig 3.3.1p1
 - PHP 8.1 oder neuer
@@ -52,14 +52,14 @@ Desktop, Tablet und Smartphone.
 
 Die vollständige Laufzeitmatrix, Admin-, Reseller-, Kunden- und
 Mailuser-Ansichten sowie die visuellen Desktop-, Tablet- und Mobilprüfungen
-sind bestanden. Der unveränderliche Tag `v1.1.4` bezeichnet genau diesen
+sind bestanden. Der unveränderliche Tag `v1.2.0` bezeichnet genau diesen
 geprüften Quellstand.
 
 ### Installation und Projektinformationen
 
 - [Installation auf Deutsch](docs/INSTALLATION-DE.md)
 - [Kompatibilität und Prüfbereich](docs/COMPATIBILITY.md)
-- [Freigabekriterien für Version 1.1.4](docs/RELEASE-GATE-1.1.4.md)
+- [Freigabekriterien für Version 1.2.0](docs/RELEASE-GATE-1.2.0.md)
 - [Branding-Anleitung](docs/BRANDING-DE.md)
 - [Änderungsprotokoll](CHANGELOG.md)
 - [Sicherheitsrichtlinie](SECURITY.md)
@@ -127,7 +127,7 @@ and the same interaction patterns work on desktop, tablet and mobile.
 
 ### Current status and compatibility
 
-`v1.1.4` is the fully validated stable release:
+`v1.2.0` is the fully validated stable release:
 
 - ISPConfig 3.3.1p1
 - PHP 8.1 or newer
@@ -136,13 +136,13 @@ and the same interaction patterns work on desktop, tablet and mobile.
 
 The complete runtime matrix, administrator, reseller, customer and mail-user
 views, and the visual desktop, tablet and mobile checks have passed. The
-immutable `v1.1.4` tag identifies this exact validated source state.
+immutable `v1.2.0` tag identifies this exact validated source state.
 
 ### Installation and project information
 
 - [Installation in English](docs/INSTALLATION-EN.md)
 - [Compatibility and validation scope](docs/COMPATIBILITY.md)
-- [Version 1.1.4 release gate](docs/RELEASE-GATE-1.1.4.md)
+- [Version 1.2.0 release gate](docs/RELEASE-GATE-1.2.0.md)
 - [Changelog](CHANGELOG.md)
 - [Security policy](SECURITY.md)
 - [Contributing](CONTRIBUTING.md)

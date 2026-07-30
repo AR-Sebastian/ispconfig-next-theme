@@ -10,12 +10,12 @@ Install and verify the theme on a staging system first.
 
 ## Installation
 
-1. Download `ispconfig-next-theme-1.1.3.tar.gz` from the GitHub release.
+1. Download `ispconfig-next-theme-1.2.0.tar.gz` from the GitHub release.
 2. Verify it with the supplied `SHA256SUMS.txt`.
 3. Extract it:
 
    ```bash
-   sudo tar -xzf ispconfig-next-theme-1.1.3.tar.gz \
+   sudo tar -xzf ispconfig-next-theme-1.2.0.tar.gz \
      -C /usr/local/ispconfig/interface/web/themes/
    ```
 

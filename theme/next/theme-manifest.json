@@ -1,52 +1,52 @@
 {
-    "schemaVersion":  1,
-    "id":  "com.ispconfig.next.theme",
-    "name":  "ISPConfig NEXT",
-    "version":  "1.1.4",
-    "stage":  "stable",
-    "releaseDate":  "2026-07-30",
-    "compatibility":  {
-                          "ispconfig":  "3.3.1p1",
-                          "preview":  "Ubuntu 22.04/24.04 and Debian 12/13, Apache and Nginx"
-                      },
-    "packageDirectory":  "next",
-    "releaseTag":  "v1.1.4",
-    "supportedModules":  [
-                             "login",
-                             "dashboard",
-                             "help",
-                             "client",
-                             "sites",
-                             "mail",
-                             "mailuser",
-                             "dns",
-                             "monitor",
-                             "tools",
-                             "admin"
-                         ],
-    "retiredThemeSurfaces":  [
-                                 "openvz",
-                                 "aps-installer",
-                                 "mailman-2",
-                                 "xmpp"
-                             ],
-    "acceptance":  {
-                       "responsiveVisuals":  244,
-                       "contrastReports":  244,
-                       "darkSurfaceReports":  244,
-                       "roleTenantChecks":  26,
-                       "billingVisuals":  8
-                   },
-    "boundaries":  {
-                       "themeOnly":  true,
-                       "coreReimplementation":  false,
-                       "productionDeploymentApproved":  false,
-                       "defaultThemeFallbackRequired":  true
-                   },
-    "distributionMode":  "standalone-theme",
-    "optionalIntegration":  {
-                                "Name":  "ISPConfig NEXT branding",
-                                "Required":  false,
-                                "BehaviorWithoutIntegration":  "Theme-local ISPConfig logo, favicon and red accent defaults"
-                            }
+  "schemaVersion": 1,
+  "id": "com.ispconfig.next.theme",
+  "name": "ISPConfig NEXT",
+  "version": "1.2.0",
+  "stage": "stable",
+  "releaseDate": "2026-07-30",
+  "compatibility": {
+    "ispconfig": "3.3.1p1",
+    "preview": "Ubuntu 22.04/24.04 and Debian 12/13, Apache and Nginx laboratories"
+  },
+  "packageDirectory": "next",
+  "distributionMode": "standalone-theme",
+  "releaseTag": "v1.2.0",
+  "supportedModules": [
+    "login",
+    "dashboard",
+    "help",
+    "client",
+    "sites",
+    "mail",
+    "mailuser",
+    "dns",
+    "monitor",
+    "tools",
+    "admin"
+  ],
+  "retiredThemeSurfaces": [
+    "openvz",
+    "aps-installer",
+    "mailman-2",
+    "xmpp"
+  ],
+  "acceptance": {
+    "responsiveVisuals": 37,
+    "contrastReports": 37,
+    "darkSurfaceReports": 37,
+    "roleTenantChecks": 50,
+    "billingVisuals": 8
+  },
+  "boundaries": {
+    "themeOnly": true,
+    "coreReimplementation": false,
+    "productionDeploymentApproved": true,
+    "defaultThemeFallbackRequired": true
+  },
+  "optionalIntegration": {
+    "name": "ISPConfig Workbench branding",
+    "required": false,
+    "behaviorWithoutIntegration": "Theme-local ISPConfig logo, favicon and red accent defaults"
+  }
 }

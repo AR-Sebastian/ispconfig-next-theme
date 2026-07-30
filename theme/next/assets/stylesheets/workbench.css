@@ -63,7 +63,7 @@ html[data-wb-theme="dark"] {
   --wb-action-soft: color-mix(in srgb, var(--wb-brand-accent) 8%, var(--wb-surface));
   --wb-action-softer: color-mix(in srgb, var(--wb-brand-accent) 4%, var(--wb-surface));
   --wb-action-muted: color-mix(in srgb, var(--wb-brand-accent) 58%, #cbd6e7);
-  --wb-action-quiet-text: color-mix(in srgb, var(--wb-brand-accent) 62%, #edf2fb);
+  --wb-action-quiet-text: color-mix(in srgb, var(--wb-brand-accent) 56%, #edf2fb);
   --wb-action-line: color-mix(in srgb, var(--wb-brand-accent) 34%, transparent);
   --wb-action-ring: color-mix(in srgb, var(--wb-brand-accent) 18%, transparent);
 }

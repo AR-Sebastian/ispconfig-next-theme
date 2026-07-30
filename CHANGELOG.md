@@ -2,13 +2,23 @@
 
 ## Unreleased
 
+## 1.2.2 - 2026-07-30
+
+- Removed private Workbench and laboratory wording from the public product.
+- Completed German and English login, helper, accessibility and system-settings copy.
+- Synchronized the document language and table/filter runtime catalogue.
+- Removed an unconditional two-factor claim from the login presentation.
+- Added release guards for public identity, localization and documentation.
+- Rebuilt and verified all 300 packaged files with SHA-256 checksums.
+- Passed administrator, reseller, customer and mail-user isolation on Apache and Nginx.
+
 ## 1.2.1 - 2026-07-30
 
 - Added a standalone locale resolver based on existing translated ISPConfig
   shell labels instead of the historically fixed HTML language attribute.
 - Unified German and English runtime copy across dashboard states, table
   counts, filters, pagination, forms and accessible theme controls.
-- Rebuilt and verified the standalone package with 300 signed files.
+- Rebuilt and verified the standalone package with SHA-256 checksums for all 300 files.
 - Passed functional parity, package, neutrality, offline installation,
   upgrade and rollback validation.
 
@@ -21,7 +31,7 @@
 - Completed administrator, reseller, customer and mail-user role isolation.
 - Finalized navigation, dashboard metrics, tables, filters, forms, responsive
   behavior, theme switching and branding feedback.
-- Verified the standalone package with 300 signed files.
+- Verified the standalone package with SHA-256 checksums for all 300 files.
 - Passed fresh installation, upgrade, backup and rollback validation.
 - Strengthened repository validation for version, tag, stage and ISPConfig
   compatibility consistency.

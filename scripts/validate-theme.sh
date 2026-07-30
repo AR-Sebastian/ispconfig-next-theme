@@ -47,6 +47,15 @@ test "$manifest_tag" = "v$version" || {
 test "$(tr -d '[:space:]' < "$theme/ispconfig_version")" = "3.3.1p1"
 test "$(tr -d '[:space:]' < "$theme/ISPC_VERSION")" = "3.3.1p1"
 
+if grep -RIEq 'Private ISPConfig Workbench|geschützte Testumgebung|an deiner Testumgebung|signed files' \
+  "$theme/templates" "$theme/README.md" "$theme/assets/favicon/site.webmanifest"; then
+  echo "Public theme contains private laboratory or inaccurate release wording." >&2
+  exit 1
+fi
+grep -q 'data-wb-i18n-de=' "$theme/templates/main_login.tpl.htm"
+grep -q 'data-wb-i18n-en=' "$theme/templates/main_login.tpl.htm"
+grep -q 'ISPConfig NEXT' "$theme/assets/favicon/site.webmanifest"
+
 while IFS= read -r -d '' file; do
   node --check "$file"
 done < <(find "$theme" -type f -name '*.js' -print0)

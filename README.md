@@ -43,7 +43,7 @@ Desktop, Tablet und Smartphone.
 
 ### Aktueller Status und Kompatibilität
 
-`v1.2.1` ist die aktuelle stabile Wartungsversion:
+`v1.2.2` ist die aktuelle stabile Wartungsversion:
 
 - ISPConfig 3.3.1p1
 - PHP 8.1 oder neuer
@@ -52,15 +52,16 @@ Desktop, Tablet und Smartphone.
 
 Die vollständige Laufzeitmatrix, Admin-, Reseller-, Kunden- und
 Mailuser-Ansichten sowie die visuellen Desktop-, Tablet- und Mobilprüfungen
-sind bestanden. Version 1.2.1 ergänzt die einheitliche deutsche und englische
-Laufzeit-Lokalisierung. Der unveränderliche Tag `v1.2.1` bezeichnet genau
-diesen geprüften Quellstand; `v1.2.0` bleibt als Rückfallversion erhalten.
+sind bestanden. Version 1.2.2 entfernt interne Laborbezeichnungen und
+vervollständigt die deutsche und englische Laufzeit-Lokalisierung. Der
+unveränderliche Tag `v1.2.2` bezeichnet genau diesen geprüften Quellstand;
+`v1.2.1` bleibt unverändert erhalten.
 
 ### Installation und Projektinformationen
 
 - [Installation auf Deutsch](docs/INSTALLATION-DE.md)
 - [Kompatibilität und Prüfbereich](docs/COMPATIBILITY.md)
-- [Freigabekriterien für Version 1.2.1](docs/RELEASE-GATE-1.2.1.md)
+- [Freigabekriterien für Version 1.2.2](docs/RELEASE-GATE-1.2.2.md)
 - [Branding-Anleitung](docs/BRANDING-DE.md)
 - [Änderungsprotokoll](CHANGELOG.md)
 - [Sicherheitsrichtlinie](SECURITY.md)
@@ -128,7 +129,7 @@ and the same interaction patterns work on desktop, tablet and mobile.
 
 ### Current status and compatibility
 
-`v1.2.1` is the current stable maintenance release:
+`v1.2.2` is the current stable maintenance release:
 
 - ISPConfig 3.3.1p1
 - PHP 8.1 or newer
@@ -137,15 +138,15 @@ and the same interaction patterns work on desktop, tablet and mobile.
 
 The complete runtime matrix, administrator, reseller, customer and mail-user
 views, and the visual desktop, tablet and mobile checks have passed. The
-Version 1.2.1 adds consistent German and English runtime localization. The
-immutable `v1.2.1` tag identifies this exact validated source state, while
-`v1.2.0` remains available as the rollback release.
+Version 1.2.2 removes internal laboratory wording and completes consistent
+German and English runtime localization. The immutable `v1.2.2` tag identifies
+this exact validated source state, while `v1.2.1` remains unchanged.
 
 ### Installation and project information
 
 - [Installation in English](docs/INSTALLATION-EN.md)
 - [Compatibility and validation scope](docs/COMPATIBILITY.md)
-- [Version 1.2.1 release gate](docs/RELEASE-GATE-1.2.1.md)
+- [Version 1.2.2 release gate](docs/RELEASE-GATE-1.2.2.md)
 - [Changelog](CHANGELOG.md)
 - [Security policy](SECURITY.md)
 - [Contributing](CONTRIBUTING.md)

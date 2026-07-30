@@ -24,6 +24,24 @@
     return 'info';
   }
 
+  function localized(german, english) {
+    var language = typeof window.workbenchLanguage === 'function' ? window.workbenchLanguage() : (document.documentElement.lang || '');
+    return String(language).toLowerCase().indexOf('de') === 0 ? german : english;
+  }
+
+  function structureContent(alert) {
+    var content = alert.querySelector(':scope > .wb-feedback__content');
+    if (content) return content;
+    content = document.createElement('div');
+    content.className = 'wb-feedback__content';
+    Array.prototype.slice.call(alert.childNodes).forEach(function(node) {
+      if (node.nodeType === 1 && node.matches('.close, [data-workbench-dismiss], .wb-feedback__icon')) return;
+      content.appendChild(node);
+    });
+    alert.appendChild(content);
+    return content;
+  }
+
   function enhanceAlert(alert) {
     if (alert.dataset.workbenchFeedback === 'true') return;
     if (alert.closest && alert.closest('.wb-login-form-surface')) return;
@@ -31,12 +49,23 @@
     alert.dataset.workbenchFeedback = 'true';
     alert.dataset.workbenchTone = state;
     alert.classList.add('wb-feedback');
-    if (!alert.hasAttribute('role')) alert.setAttribute('role', state === 'danger' || state === 'warning' ? 'alert' : 'status');
+    alert.setAttribute('role', state === 'danger' || state === 'warning' ? 'alert' : 'status');
+    alert.setAttribute('aria-live', state === 'danger' || state === 'warning' ? 'assertive' : 'polite');
+    alert.setAttribute('aria-atomic', 'true');
+    structureContent(alert);
     var icon = document.createElement('span');
     icon.className = 'wb-feedback__icon';
     icon.setAttribute('aria-hidden', 'true');
     icon.appendChild(svgFromMarkup(icons[state]));
     alert.prepend(icon);
+    var dismiss = alert.querySelector(':scope > .close, :scope > [data-workbench-dismiss]');
+    if (dismiss) {
+      if (dismiss.tagName === 'BUTTON' && !dismiss.getAttribute('type')) dismiss.setAttribute('type', 'button');
+      if (!dismiss.getAttribute('aria-label') || /^(?:close|schlie(?:ß|ss)en)$/i.test(dismiss.getAttribute('aria-label'))) {
+        dismiss.setAttribute('aria-label', localized('Schließen', 'Close'));
+      }
+      dismiss.setAttribute('title', localized('Meldung schließen', 'Dismiss notification'));
+    }
   }
 
   function enhanceDialog(dialog) {

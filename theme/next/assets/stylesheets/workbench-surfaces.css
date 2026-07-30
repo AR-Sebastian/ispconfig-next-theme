@@ -592,30 +592,6 @@ body.wb-app-navigation-enabled :where(.alert, .alert-notification) {
   background-color: var(--wb-surface-muted);
 }
 
-body.wb-app-navigation-enabled .alert-success {
-  color: color-mix(in srgb, var(--wb-success) 76%, var(--wb-text));
-  border-color: color-mix(in srgb, var(--wb-success) 42%, var(--wb-border));
-  background-color: color-mix(in srgb, var(--wb-success) 10%, var(--wb-surface));
-}
-
-body.wb-app-navigation-enabled .alert-warning {
-  color: color-mix(in srgb, var(--wb-warning) 76%, var(--wb-text));
-  border-color: color-mix(in srgb, var(--wb-warning) 42%, var(--wb-border));
-  background-color: color-mix(in srgb, var(--wb-warning) 10%, var(--wb-surface));
-}
-
-body.wb-app-navigation-enabled :where(.alert-danger, .alert-error) {
-  color: color-mix(in srgb, var(--wb-danger) 76%, var(--wb-text));
-  border-color: color-mix(in srgb, var(--wb-danger) 42%, var(--wb-border));
-  background-color: color-mix(in srgb, var(--wb-danger) 10%, var(--wb-surface));
-}
-
-body.wb-app-navigation-enabled .alert-info {
-  color: color-mix(in srgb, var(--wb-info) 76%, var(--wb-text));
-  border-color: color-mix(in srgb, var(--wb-info) 42%, var(--wb-border));
-  background-color: color-mix(in srgb, var(--wb-info) 10%, var(--wb-surface));
-}
-
 body.wb-app-navigation-enabled :where(.alert, .alert-notification) {
   margin: 14px 0;
   padding: 12px 14px;

@@ -170,11 +170,17 @@ body.wb-app-navigation-enabled #pageContent .wb-notice__icon::before { content: 
 body.wb-app-navigation-enabled #pageContent :is(.wb-notice--danger, .wb-notice--warning) .wb-notice__icon::before { content: '!'; }
 body.wb-app-navigation-enabled #pageContent .wb-notice--success .wb-notice__icon::before { content: '\2713'; }
 body.wb-app-navigation-enabled #pageContent .wb-feedback__icon svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-body.wb-app-navigation-enabled #pageContent :is(.wb-notice, .wb-feedback) > :not(.wb-notice__icon, .wb-feedback__icon, .close) { grid-column: 2; min-width: 0; }
+body.wb-app-navigation-enabled #pageContent :is(.wb-notice, .wb-feedback) > :not(.wb-notice__icon, .wb-feedback__icon, .close, [data-workbench-dismiss]) { grid-column: 2; min-width: 0; }
+body.wb-app-navigation-enabled #pageContent .wb-feedback__content { display: flow-root; min-width: 0; overflow-wrap: anywhere; }
+body.wb-app-navigation-enabled #pageContent .wb-feedback__content > :first-child { margin-top: 0; }
+body.wb-app-navigation-enabled #pageContent .wb-feedback__content > :last-child { margin-bottom: 0; }
+body.wb-app-navigation-enabled #pageContent .wb-feedback__content :is(ul, ol) { margin: .35rem 0 0; padding-inline-start: 1.25rem; }
+body.wb-app-navigation-enabled #pageContent .wb-feedback__content li + li { margin-top: .2rem; }
+body.wb-app-navigation-enabled #pageContent .wb-feedback__content a { color: inherit; font-weight: 750; text-decoration-thickness: .08em; text-underline-offset: .16em; }
 body.wb-app-navigation-enabled #pageContent .wb-feedback > :is(.alert-label, .alert-content) { color: inherit; font-size: 12px; line-height: 1.5; }
 body.wb-app-navigation-enabled #pageContent .wb-feedback > .alert-label { font-weight: 800; }
 body.wb-app-navigation-enabled #pageContent :is(.wb-notice, .wb-feedback) p:last-child { margin-bottom: 0; }
-body.wb-app-navigation-enabled #pageContent .wb-feedback > .close { grid-column: 3; grid-row: 1; width: 28px; height: 28px; margin: -2px; border-radius: 7px; }
+body.wb-app-navigation-enabled #pageContent .wb-feedback > :is(.close, [data-workbench-dismiss]) { grid-column: 3; grid-row: 1; width: 28px; height: 28px; margin: -2px; border-radius: 7px; }
 
 body.wb-app-navigation-enabled :is(.wb-form-state, .wb-submit-feedback) {
   display: inline-flex;

@@ -25,7 +25,8 @@ evidence. Published tags are immutable.
 - Functional parity with LIQUID passed for 243 templates per theme
 - 241 shared module templates are byte-identical
 - JavaScript syntax passed for 70 files
-- ZIP and TAR.GZ package validation passed with 300 signed files
+- ZIP and TAR.GZ payload validation passed with 300 theme files
+- Public archive validation passed with 303 files including three legal notices
 - Fresh installation, upgrade, backup and rollback passed
 - Public-source neutrality and secret scans passed
 - GitHub validation must pass for the exact release commit and tag

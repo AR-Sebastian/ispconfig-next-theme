@@ -3,7 +3,18 @@
 
   if (window.workbenchFieldSearch) return;
 
-  var defaults = {
+  function language() {
+    return typeof window.workbenchLanguage === 'function'
+      ? window.workbenchLanguage()
+      : String(document.documentElement.getAttribute('lang') || 'en').toLowerCase().split('-')[0];
+  }
+
+  function localized(german, english) {
+    return language() === 'de' ? german : english;
+  }
+
+  function defaults() {
+    return {
     dataSrc: '',
     timeout: 500,
     minChars: 2,
@@ -11,12 +22,13 @@
     fillSearchField: false,
     fillSearchFieldWith: 'title',
     ResultsTextPrefix: '',
-    resultsLimit: '$ of % results',
-    noResultsText: 'No results.',
-    noResultsLimit: '0 results',
+    resultsLimit: localized('$ von % Ergebnissen', '$ of % results'),
+    noResultsText: localized('Keine Ergebnisse.', 'No results.'),
+    noResultsLimit: localized('0 Ergebnisse', '0 results'),
     searchFieldWatermark: '',
     displayEmptyCategories: false
-  };
+    };
+  }
   var sequence = 0;
   var states = new WeakMap();
 
@@ -25,7 +37,7 @@
   }
 
   function mergeOptions(options) {
-    return Object.assign({}, defaults, options || {});
+    return Object.assign({}, defaults(), options || {});
   }
 
   function isAbort(error) {

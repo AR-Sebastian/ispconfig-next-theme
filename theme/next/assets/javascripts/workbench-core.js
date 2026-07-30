@@ -1003,6 +1003,10 @@
   }
 
   function initDeclarativeFieldSearch(root) {
+    var language = typeof window.workbenchLanguage === 'function'
+      ? window.workbenchLanguage()
+      : String(document.documentElement.getAttribute('lang') || 'en').toLowerCase().split('-')[0];
+    var german = language === 'de';
     queryAll(root || document, '[data-workbench-field-search]').forEach(function(input) {
       var endpointName = input.getAttribute('data-search-endpoint') || '';
       var endpoint = endpointName ? workbenchEndpoint(endpointName) : (input.getAttribute('data-search-src') || input.getAttribute('data-src') || '');
@@ -1010,10 +1014,10 @@
       if (!endpoint) return;
       ISPConfig.enhanceSearch(input, {
         dataSrc: endpoint,
-        resultsLimit: input.getAttribute('data-search-results-limit') || '$ of % results',
+        resultsLimit: input.getAttribute('data-search-results-limit') || (german ? '$ von % Ergebnissen' : '$ of % results'),
         ResultsTextPrefix: input.getAttribute('data-search-results-prefix') || '',
-        noResultsText: input.getAttribute('data-search-no-results') || 'No results.',
-        noResultsLimit: input.getAttribute('data-search-no-results-limit') || '0 results',
+        noResultsText: input.getAttribute('data-search-no-results') || (german ? 'Keine Ergebnisse.' : 'No results.'),
+        noResultsLimit: input.getAttribute('data-search-no-results-limit') || (german ? '0 Ergebnisse' : '0 results'),
         minChars: Number(input.getAttribute('data-search-min-chars') || 0),
         cssPrefix: input.getAttribute('data-search-css-prefix') || 'df-',
         fillSearchField: input.getAttribute('data-search-fill-field') !== 'false',

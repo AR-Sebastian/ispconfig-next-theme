@@ -63,7 +63,12 @@
       return child.nodeType === 3 && child.textContent.trim();
     }).map(function(child) { return child.textContent.trim(); }).join(' ');
     if (visibleText) return;
-    var fallback = {delete:'Delete',filter:'Filter',edit:'Edit',loginas:'Log in as user',dbadmin:'Open database administration',link:'Open link',signal:'Open statistics',close:'Close',calendar:'Open calendar',clone:'Copy',key:'Key',lock:'Locked','arrow-left':'Previous','arrow-right':'Next'};
+    var language = typeof window.workbenchLanguage === 'function'
+      ? window.workbenchLanguage()
+      : String(document.documentElement.getAttribute('lang') || 'en').toLowerCase().split('-')[0];
+    var fallback = language === 'de'
+      ? {delete:'Löschen',filter:'Filtern',edit:'Bearbeiten',loginas:'Als Benutzer anmelden',dbadmin:'Datenbankverwaltung öffnen',link:'Link öffnen',signal:'Statistiken öffnen',close:'Schließen',calendar:'Kalender öffnen',clone:'Kopieren',key:'Schlüssel',lock:'Gesperrt','arrow-left':'Zurück','arrow-right':'Weiter'}
+      : {delete:'Delete',filter:'Filter',edit:'Edit',loginas:'Log in as user',dbadmin:'Open database administration',link:'Open link',signal:'Open statistics',close:'Close',calendar:'Open calendar',clone:'Copy',key:'Key',lock:'Locked','arrow-left':'Previous','arrow-right':'Next'};
     var label = messages['icon_' + name.replace(/-/g, '_')] || fallback[name];
     if (label) control.setAttribute('aria-label', label);
   }

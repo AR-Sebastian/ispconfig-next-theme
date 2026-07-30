@@ -10,6 +10,8 @@
   var retryRequests = {};
   var messages = {};
   var contentRequest = null;
+  var contentStateTimer = null;
+  var contentStateDelay = 140;
   var historyKey = 'workbenchContent';
   var isGerman = (typeof window.workbenchLanguage === 'function' ? window.workbenchLanguage() : (document.documentElement.lang || '')).toLowerCase().indexOf('de') === 0;
 
@@ -1604,6 +1606,21 @@
     host.appendChild(contentStateNode(kind, token, diagnostic, retryArgs));
   }
 
+  function clearScheduledContentState() {
+    if (contentStateTimer === null) return;
+    window.clearTimeout(contentStateTimer);
+    contentStateTimer = null;
+  }
+
+  function scheduleLoadingContentState(host, token) {
+    clearScheduledContentState();
+    contentStateTimer = window.setTimeout(function() {
+      contentStateTimer = null;
+      if (token !== sequence || !host || host.getAttribute('aria-busy') !== 'true') return;
+      renderContentState(host, 'loading');
+    }, contentStateDelay);
+  }
+
   function activateFragmentScripts(host) {
     if (!host || !host.querySelectorAll) return 0;
     var activated = 0;
@@ -1640,14 +1657,16 @@
     retryRequests[token] = Array.prototype.slice.call(args);
     if (!api || !host) return null;
 
+    clearScheduledContentState();
     if (contentRequest && contentRequest.readyState !== 4) contentRequest.abort();
     if (window.workbenchMonitoring) window.workbenchMonitoring.destroy(host);
     host.setAttribute('aria-busy', 'true');
-    renderContentState(host, 'loading');
+    scheduleLoadingContentState(host, token);
     var request = requestHtml(pagename, params || null, 30000);
     contentRequest = request;
     request.promise.then(function(response) {
         if (token !== sequence || request.aborted) return;
+        clearScheduledContentState();
         if (response.indexOf('HEADER_REDIRECT:') > -1) {
           delete retryRequests[token];
           api.navigateTo(response.split(':')[1]);
@@ -1678,9 +1697,14 @@
         announceNavigationComplete(pagename);
       }).catch(function(error) {
         if (isSupersededRequest(request, error) || token !== sequence) {
+          if (token === sequence) {
+            clearScheduledContentState();
+            host.setAttribute('aria-busy', 'false');
+          }
           delete retryRequests[token];
           return;
         }
+        clearScheduledContentState();
         host.setAttribute('aria-busy', 'false');
         renderContentState(host, 'error', token, errorDiagnostic(error, pagename), Array.prototype.slice.call(args));
         api.reportError('Navigation request was not successful.');

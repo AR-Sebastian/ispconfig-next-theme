@@ -12,6 +12,11 @@
   var messages = {};
   var moduleTransitionTimer = null;
 
+  function localized(german, english) {
+    var language = typeof window.workbenchLanguage === 'function' ? window.workbenchLanguage() : (document.documentElement.lang || '');
+    return String(language).toLowerCase().indexOf('de') === 0 ? german : english;
+  }
+
   try {
     var messageSource = document.getElementById('workbench-content-messages');
     messages = JSON.parse(messageSource ? messageSource.textContent : '{}');
@@ -48,7 +53,7 @@
       state.setAttribute('role', 'status');
       var sr = document.createElement('span');
       sr.className = 'sr-only';
-      sr.textContent = messages.module_switching || 'Switching module';
+      sr.textContent = messages.module_switching || localized('Modul wird gewechselt', 'Switching module');
       state.appendChild(sr);
       item.appendChild(state);
     });
@@ -116,7 +121,7 @@
       status.setAttribute('role', 'status');
       status.setAttribute('aria-live', 'polite');
       status.setAttribute('aria-atomic', 'true');
-      status.textContent = 'Processing request';
+      status.textContent = messages.processing || localized('Anfrage wird verarbeitet', 'Processing request');
       region.prepend(status);
     }
   };

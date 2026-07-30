@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <style id='workbench-branding-vars'>:root { --wb-accent: #d71920; --wb-action: #d71920; --wb-dark-logo: url('/themes/next/assets/images/ispconfig-workbench-logo-dark.svg'); } .wb-skip-link:focus, .wb-skip-link:focus-visible { transform: none !important; }</style>
+  <meta charset='utf-8' />
+
+  <title><tmpl_var name="company_name"><tmpl_var name="app_title"></title>
+
+  <meta name='viewport' content='width=device-width, initial-scale=1, user-scalable=yes'>
+  <meta name='description' lang='en' content='' />
+  <meta name='keywords' lang='en' content='' />
+
+ <link rel='apple-touch-icon' sizes='180x180' href='/themes/next/assets/images/ispconfig-workbench-favicon.svg'>
+ <link rel='icon' type='image/png' sizes='32x32' href='/themes/next/assets/images/ispconfig-workbench-favicon.svg'>
+ <link rel='icon' type='image/png' sizes='16x16' href='/themes/next/assets/images/ispconfig-workbench-favicon.svg'>
+ <link rel='manifest' href='/themes/next/assets/favicon/site.webmanifest'>
+ <link rel='mask-icon' href='/themes/next/assets/images/ispconfig-workbench-favicon.svg' color='#d71920'>
+ <link rel='shortcut icon' href='/themes/next/assets/images/ispconfig-workbench-favicon.svg'>
+ <meta name='msapplication-TileColor' content='#d71920'>
+ <meta name='msapplication-config' content='/themes/next/assets/favicon/browserconfig.xml'>
+ <meta name='theme-color' content='#d71920'>
+ <script src='../themes/next/assets/javascripts/workbench-early.js?ver=1'></script>
+
+  <link rel='stylesheet' href='../themes/next/assets/stylesheets/workbench.css?ver=146' />
+  <link rel='stylesheet' href='../themes/next/assets/stylesheets/workbench-auth.css?ver=19' />
+</head>
+
+<body class="wb-login-page">
+<main class="wb-login-shell">
+  <aside class="wb-login-hero">
+    <div class="wb-login-hero__logo"><img src="<tmpl_var name='base64_logo_txt'>" alt="Interface logo"></div>
+    <div class="wb-login-hero__copy">
+      <div class="wb-login-hero__kicker">Sicherer Zugang</div>
+      <h1>Deine Server.<br>Ein klarer<br>Einstieg.</h1>
+      <p>Ein moderner, fokussierter Einstieg in deine zentrale Serververwaltung.</p>
+      <ul>
+        <li>Zentrale Verwaltung deiner Dienste</li>
+        <li>Gesch&uuml;tzte Anmeldung mit Zwei-Faktor-Pr&uuml;fung</li>
+        <li>Optimiert f&uuml;r Desktop, Tablet und Smartphone</li>
+      </ul>
+    </div>
+    <div class="wb-login-hero__footer">
+      <span class="wb-login-hero__status" aria-hidden="true"></span>
+      <small>Private ISPConfig Workbench &middot; gesch&uuml;tzte Testumgebung</small>
+    </div>
+  </aside>
+  <section class="wb-login-card" aria-labelledby="wb-login-title">
+    <button type="button" class="wb-theme-toggle wb-login-theme-toggle" aria-label="Switch to dark theme"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20.7 15.3A8.5 8.5 0 0 1 8.7 3.3 8.5 8.5 0 1 0 20.7 15.3Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <div class="wb-login-badge">ISPConfig Workbench</div>
+    <h2 id="wb-login-title">Willkommen zur&uuml;ck</h2>
+    <p class="wb-login-subtitle">Melde dich an deiner Testumgebung an.</p>
+    <div class="wb-login-form-surface">
+      <tmpl_dyninclude name="content_tpl">
+    </div>
+    <div class="wb-login-security" aria-label="Sicherheitshinweis">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 5.5 5.8v5.1c0 4.3 2.7 8.1 6.5 9.6 3.8-1.5 6.5-5.3 6.5-9.6V5.8L12 3Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="m9.2 12 1.8 1.8 3.8-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Zugangsdaten werden nur an diese ISPConfig-Instanz &uuml;bertragen.</span>
+    </div>
+    <div class="wb-login-disclaimer"><small><tmpl_var name="custom_login"></small></div>
+  </section>
+</main>
+  <script src='../themes/next/assets/javascripts/workbench-feedback.js?ver=3'></script>
+  <script src='../themes/next/assets/javascripts/workbench-login.js?ver=8'></script>
+  <script src='../themes/next/assets/javascripts/workbench-theme.js?ver=14'></script>
+</body>
+
+</html>

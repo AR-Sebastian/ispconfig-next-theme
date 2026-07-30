@@ -1,0 +1,29 @@
+name: Validate theme
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check required files
+        run: |
+          test -f theme/next/theme-manifest.json
+          test -f theme/next/ispconfig_version
+          test -f theme/next/ISPC_VERSION
+          test -f LICENSE.md
+          test -f THIRD_PARTY_NOTICES.md
+          test -f theme/next/LICENSE.md
+          test -f theme/next/THIRD_PARTY_NOTICES.md
+      - name: Validate manifest
+        run: node -e "JSON.parse(require('fs').readFileSync('theme/next/theme-manifest.json','utf8'))"
+      - name: Check JavaScript syntax
+        run: |
+          find theme/next -type f -name '*.js' -print0 |
+          while IFS= read -r -d '' file; do node --check "$file"; done

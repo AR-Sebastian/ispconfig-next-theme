@@ -52,6 +52,7 @@
     var root = document.getElementById('pageContent');
     if (!root) return;
     var feedback = ensureFeedback(root);
+    feedback.removeAttribute('data-workbench-delayed');
     feedback.dataset.state = state;
     feedback.setAttribute('role', state === 'failed' ? 'alert' : 'status');
     feedback.querySelector('.wb-submit-feedback__label').textContent = label;
@@ -93,6 +94,7 @@
     if (!active) return;
     var current = active;
     active = null;
+    if (current.slowTimer) window.clearTimeout(current.slowTimer);
     if (current.control && current.control.isConnected) {
       current.control.disabled = current.disabled;
       if (current.ariaBusy === null) current.control.removeAttribute('aria-busy');
@@ -117,6 +119,15 @@
     var root = document.getElementById('pageContent');
     if (root) root.setAttribute('aria-busy', 'true');
     setFeedback('uploading', messages.upload_sending || 'Upload in progress');
+    active.slowTimer = window.setTimeout(function() {
+      if (!active) return;
+      var german = (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0;
+      setFeedback('uploading', german
+        ? 'Der Upload dauert etwas l\u00e4nger. Die Datei wird weiterhin verarbeitet.'
+        : 'The upload is taking a little longer. The file is still being processed.');
+      var feedback = document.querySelector('#pageContent > .wb-upload-feedback');
+      if (feedback) feedback.setAttribute('data-workbench-delayed', 'true');
+    }, 7000);
 
     var request;
     try { request = window.workbenchHttp.postMultipart(form, target, { timeout: 120000 }); }

@@ -11,6 +11,8 @@
   var moduleItems = [];
   var messages = {};
   var moduleTransitionTimer = null;
+  var moduleSlowTimer = null;
+  var requestSlowTimer = null;
 
   function localized(german, english) {
     var language = typeof window.workbenchLanguage === 'function' ? window.workbenchLanguage() : (document.documentElement.lang || '');
@@ -29,9 +31,14 @@
       window.clearTimeout(moduleTransitionTimer);
       moduleTransitionTimer = null;
     }
+    if (moduleSlowTimer !== null) {
+      window.clearTimeout(moduleSlowTimer);
+      moduleSlowTimer = null;
+    }
     document.body.classList.remove('wb-module-transition-active');
     moduleItems.forEach(function(item) {
       item.removeAttribute('aria-busy');
+      item.removeAttribute('data-workbench-delayed');
       item.classList.remove('wb-module-transition-source');
       var state = item.querySelector('.wb-module-transition');
       if (state) state.remove();
@@ -60,6 +67,13 @@
     // Match the content-state request timeout so the transition indicator does
     // not disappear while the underlying module request is still active.
     moduleTransitionTimer = window.setTimeout(finishModuleTransition, 30000);
+    moduleSlowTimer = window.setTimeout(function() {
+      moduleItems.forEach(function(item) {
+        item.setAttribute('data-workbench-delayed', 'true');
+        var label = item.querySelector('.wb-module-transition .sr-only');
+        if (label) label.textContent = localized('Modul wird weiterhin geladen', 'Module is still loading');
+      });
+    }, 7000);
   }
 
   var moduleRequest = null;
@@ -124,12 +138,27 @@
       status.textContent = messages.processing || localized('Anfrage wird verarbeitet', 'Processing request');
       region.prepend(status);
     }
+    if (legacy.requestsRunning === 1) {
+      if (requestSlowTimer !== null) window.clearTimeout(requestSlowTimer);
+      requestSlowTimer = window.setTimeout(function() {
+        requestSlowTimer = null;
+        var current = content();
+        var currentStatus = current && current.querySelector(':scope > .wb-request-status');
+        if (!currentStatus || legacy.requestsRunning < 1) return;
+        currentStatus.setAttribute('data-workbench-delayed', 'true');
+        currentStatus.textContent = localized('Die Anfrage dauert etwas länger. Sie wird weiterhin verarbeitet.', 'This request is taking a little longer. It is still being processed.');
+      }, 7000);
+    }
   };
 
   legacy.endRequest = function() {
     legacy.requestsRunning = Math.max(0, legacy.requestsRunning - 1);
     document.body.dataset.wbRequestCount = String(legacy.requestsRunning);
     if (legacy.requestsRunning > 0) return;
+    if (requestSlowTimer !== null) {
+      window.clearTimeout(requestSlowTimer);
+      requestSlowTimer = null;
+    }
     document.body.classList.remove('wb-request-active');
     var region = content();
     if (!region) return;

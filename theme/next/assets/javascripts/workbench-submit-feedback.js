@@ -77,6 +77,7 @@
     if (!root || !root.isConnected) root = host();
     if (!root) return null;
     var feedback = ensureFeedback(root);
+    feedback.removeAttribute('data-workbench-delayed');
     feedback.dataset.state = state;
     feedback.setAttribute('role', state === 'failed' ? 'alert' : 'status');
     feedback.querySelector('.wb-submit-feedback__label').textContent = label;
@@ -98,6 +99,15 @@
     control.classList.add('wb-submit-source');
     root.setAttribute('aria-busy', 'true');
     setFeedback(root, 'saving', localizedMessage('form_saving', '\u00c4nderungen werden gespeichert', 'Saving changes'));
+    active.slowTimer = window.setTimeout(function() {
+      if (!active || active.request !== request) return;
+      var feedback = setFeedback(active.root, 'saving', localizedMessage(
+        'form_saving_delayed',
+        'Das Speichern dauert etwas l\u00e4nger. Die Anfrage wird weiterhin verarbeitet.',
+        'Saving is taking a little longer. The request is still being processed.'
+      ));
+      if (feedback) feedback.setAttribute('data-workbench-delayed', 'true');
+    }, 7000);
     return true;
   }
 
@@ -126,6 +136,7 @@
   function complete() {
     if (!active) return false;
     var control = active.control;
+    if (active.slowTimer) window.clearTimeout(active.slowTimer);
     if (control && control.isConnected) {
       control.disabled = active.disabled;
       if (active.ariaBusy === null) control.removeAttribute('aria-busy');

@@ -184,6 +184,7 @@ body.wb-app-navigation-enabled #pageContent .wb-feedback > :is(.close, [data-wor
 body.wb-app-navigation-enabled #pageContent > .wb-feedback-stack { display: grid; gap: 8px; margin: 0 0 14px; }
 body.wb-app-navigation-enabled #pageContent > .wb-feedback-stack:empty { display: none; }
 body.wb-app-navigation-enabled #pageContent > .wb-feedback-stack > .wb-feedback { margin: 0; }
+body.wb-app-navigation-enabled #pageContent > .wb-feedback-stack > .wb-feedback[data-workbench-dismiss-paused='true'] { box-shadow: 0 0 0 2px color-mix(in srgb, currentColor 10%, transparent); }
 
 body.wb-app-navigation-enabled :is(.wb-form-state, .wb-submit-feedback) {
   display: inline-flex;

@@ -85,6 +85,51 @@
     Array.prototype.forEach.call(host.querySelectorAll('.wb-dialog'), enhanceDialog);
   }
 
+  function dismissGenerated(alert) {
+    if (!alert) return;
+    if (alert.workbenchDismissController && alert.workbenchDismissController.timer) {
+      window.clearTimeout(alert.workbenchDismissController.timer);
+    }
+    alert.remove();
+  }
+
+  function scheduleGeneratedDismiss(alert, toneName) {
+    if (!alert || ['success', 'info'].indexOf(toneName) === -1) return;
+    var duration = toneName === 'success' ? 7000 : 10000;
+    var controller = alert.workbenchDismissController || {};
+    if (controller.timer) window.clearTimeout(controller.timer);
+    controller.timer = null;
+    controller.remaining = duration;
+
+    controller.pause = function() {
+      if (!controller.timer) return;
+      window.clearTimeout(controller.timer);
+      controller.timer = null;
+      controller.remaining = Math.max(500, controller.remaining - (Date.now() - controller.started));
+      alert.setAttribute('data-workbench-dismiss-paused', 'true');
+    };
+    controller.resume = function() {
+      if (controller.timer || !alert.isConnected) return;
+      alert.removeAttribute('data-workbench-dismiss-paused');
+      controller.started = Date.now();
+      controller.timer = window.setTimeout(function() { dismissGenerated(alert); }, controller.remaining);
+    };
+
+    if (!controller.bound) {
+      alert.addEventListener('pointerenter', controller.pause);
+      alert.addEventListener('pointerleave', controller.resume);
+      alert.addEventListener('focusin', controller.pause);
+      alert.addEventListener('focusout', function() {
+        window.setTimeout(function() {
+          if (!alert.contains(document.activeElement)) controller.resume();
+        }, 0);
+      });
+      controller.bound = true;
+    }
+    alert.workbenchDismissController = controller;
+    controller.resume();
+  }
+
   function show(message, state) {
     var text = String(message || '').trim();
     if (!text) return null;
@@ -99,9 +144,20 @@
     }
 
     var toneName = ['success', 'danger', 'warning', 'info'].indexOf(state) > -1 ? state : 'info';
+    var duplicate = Array.prototype.find.call(stack.querySelectorAll('[data-workbench-generated-feedback]'), function(item) {
+      return item.getAttribute('data-workbench-feedback-message') === text &&
+        item.getAttribute('data-workbench-feedback-tone') === toneName;
+    });
+    if (duplicate) {
+      stack.prepend(duplicate);
+      scheduleGeneratedDismiss(duplicate, toneName);
+      return duplicate;
+    }
     var alert = document.createElement('div');
     alert.className = 'alert alert-' + toneName;
     alert.setAttribute('data-workbench-generated-feedback', 'true');
+    alert.setAttribute('data-workbench-feedback-message', text);
+    alert.setAttribute('data-workbench-feedback-tone', toneName);
     var content = document.createElement('p');
     content.textContent = text;
     var dismiss = document.createElement('button');
@@ -114,9 +170,10 @@
     alert.appendChild(dismiss);
     stack.prepend(alert);
     enhanceAlert(alert);
+    scheduleGeneratedDismiss(alert, toneName);
 
     Array.prototype.slice.call(stack.querySelectorAll('[data-workbench-generated-feedback]')).slice(3).forEach(function(oldAlert) {
-      oldAlert.remove();
+      dismissGenerated(oldAlert);
     });
     return alert;
   }

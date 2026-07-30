@@ -7,17 +7,17 @@ Navigation, Tabellen, Filter, Formulare, Rückmeldungen und responsive Ansichten
 ohne die bewährten Berechtigungen, Routen oder Serveraktionen von ISPConfig zu
 ersetzen.
 
-![NEXT-Dashboard des installierten v1.1.3-Kandidaten](docs/images/dashboard-runtime-v1.1.3.png)
+![NEXT-Dashboard der installierten Version 1.1.4](docs/images/dashboard-runtime-v1.1.4.png)
 
 Die Abbildung ist eine echte Laufzeitaufnahme des installierten
-`v1.1.3`-Kandidaten auf ISPConfig 3.3.1p1. Sie ist kein Konzept-Rendering.
+stabilen Version `v1.1.4` auf ISPConfig 3.3.1p1. Sie ist kein Konzept-Rendering.
 
 Weitere echte Laufzeitaufnahmen:
 
-- [Login](docs/images/login-runtime-v1.1.3.png)
+- [Login](docs/images/login-runtime-v1.1.4.png)
 - [Tabelle mit geöffneten Filtern](docs/images/table-filters-runtime-v1.1.3.png)
-- [Formular](docs/images/form-runtime-v1.1.3.png)
-- [Mobile Navigation](docs/images/mobile-navigation-runtime-v1.1.3.png)
+- [Formular](docs/images/form-runtime-v1.1.4.png)
+- [Mobile Navigation](docs/images/mobile-navigation-runtime-v1.1.4.png)
 
 ### Warum NEXT entstanden ist
 
@@ -43,7 +43,7 @@ Desktop, Tablet und Smartphone.
 
 ### Aktueller Status und Kompatibilität
 
-`v1.1.3` ist der vollständig geprüfte Veröffentlichungskandidat:
+`v1.1.4` ist die vollständig geprüfte stabile Version:
 
 - ISPConfig 3.3.1p1
 - PHP 8.1 oder neuer
@@ -52,14 +52,14 @@ Desktop, Tablet und Smartphone.
 
 Die vollständige Laufzeitmatrix, Admin-, Reseller-, Kunden- und
 Mailuser-Ansichten sowie die visuellen Desktop-, Tablet- und Mobilprüfungen
-sind bestanden. Bis zum unveränderlichen Tag bleibt `release/v1.1.3` bewusst
-als Kandidatenbranch gekennzeichnet.
+sind bestanden. Der unveränderliche Tag `v1.1.4` bezeichnet genau diesen
+geprüften Quellstand.
 
 ### Installation und Projektinformationen
 
 - [Installation auf Deutsch](docs/INSTALLATION-DE.md)
 - [Kompatibilität und Prüfbereich](docs/COMPATIBILITY.md)
-- [Freigabekriterien für Version 1.1.3](docs/RELEASE-GATE-1.1.3.md)
+- [Freigabekriterien für Version 1.1.4](docs/RELEASE-GATE-1.1.4.md)
 - [Branding-Anleitung](docs/BRANDING-DE.md)
 - [Änderungsprotokoll](CHANGELOG.md)
 - [Sicherheitsrichtlinie](SECURITY.md)
@@ -92,17 +92,17 @@ NEXT is a responsive light and dark theme for ISPConfig. It unifies navigation,
 tables, filters, forms, feedback and responsive layouts without replacing
 ISPConfig's established permissions, routes or server-side operations.
 
-![NEXT dashboard from the installed v1.1.3 candidate](docs/images/dashboard-runtime-v1.1.3.png)
+![NEXT dashboard from installed version 1.1.4](docs/images/dashboard-runtime-v1.1.4.png)
 
-The image is an actual runtime capture of the installed `v1.1.3` candidate on
+The image is an actual runtime capture of stable version `v1.1.4` on
 ISPConfig 3.3.1p1. It is not a concept rendering.
 
 More actual runtime captures:
 
-- [Login](docs/images/login-runtime-v1.1.3.png)
+- [Login](docs/images/login-runtime-v1.1.4.png)
 - [Table with expanded filters](docs/images/table-filters-runtime-v1.1.3.png)
-- [Form](docs/images/form-runtime-v1.1.3.png)
-- [Mobile navigation](docs/images/mobile-navigation-runtime-v1.1.3.png)
+- [Form](docs/images/form-runtime-v1.1.4.png)
+- [Mobile navigation](docs/images/mobile-navigation-runtime-v1.1.4.png)
 
 ### Why NEXT was created
 
@@ -127,7 +127,7 @@ and the same interaction patterns work on desktop, tablet and mobile.
 
 ### Current status and compatibility
 
-`v1.1.3` is the fully validated release candidate:
+`v1.1.4` is the fully validated stable release:
 
 - ISPConfig 3.3.1p1
 - PHP 8.1 or newer
@@ -135,15 +135,14 @@ and the same interaction patterns work on desktop, tablet and mobile.
 - Ubuntu 22.04/24.04 and Debian 12/13 with Apache and Nginx validated
 
 The complete runtime matrix, administrator, reseller, customer and mail-user
-views, and the visual desktop, tablet and mobile checks have passed. Until the
-immutable tag is created, `release/v1.1.3` intentionally remains identified as
-a candidate branch.
+views, and the visual desktop, tablet and mobile checks have passed. The
+immutable `v1.1.4` tag identifies this exact validated source state.
 
 ### Installation and project information
 
 - [Installation in English](docs/INSTALLATION-EN.md)
 - [Compatibility and validation scope](docs/COMPATIBILITY.md)
-- [Version 1.1.3 release gate](docs/RELEASE-GATE-1.1.3.md)
+- [Version 1.1.4 release gate](docs/RELEASE-GATE-1.1.4.md)
 - [Changelog](CHANGELOG.md)
 - [Security policy](SECURITY.md)
 - [Contributing](CONTRIBUTING.md)

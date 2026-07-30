@@ -40,6 +40,8 @@ passed on Debian 12 with Apache and Nginx. Required and forbidden navigation
 modules, representative protected routes, default-theme fallback and all 47
 referenced assets were checked for every role.
 
-This is candidate evidence, not yet a public compatibility claim. The visual
-browser, responsive and screenshot matrix must still pass before the candidate
-can be merged and tagged.
+The visual browser, responsive and screenshot matrix has also passed for login,
+dashboard, tables, expanded filters, forms and mobile navigation in light and
+dark presentation. The candidate is ready for the immutable tag workflow; the
+tagged archives and checksums must still be downloaded and verified before the
+GitHub release is declared complete.

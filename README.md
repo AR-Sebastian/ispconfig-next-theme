@@ -43,17 +43,17 @@ Desktop, Tablet und Smartphone.
 
 ### Aktueller Status und Kompatibilität
 
-`v1.1.2` ist eine öffentliche Test- und Evaluierungsversion:
+`v1.1.3` ist der vollständig geprüfte Veröffentlichungskandidat:
 
-- ISPConfig 3.3-Entwicklungsstand (`3.3dev`)
+- ISPConfig 3.3.1p1
 - PHP 8.1 oder neuer
 - Aktuelle Desktop- und Mobilbrowser
-- Keine Freigabe für den Produktiveinsatz
+- Ubuntu 22.04/24.04 und Debian 12/13 mit Apache und Nginx geprüft
 
-Eine Kompatibilität mit ISPConfig 3.3.1p1 wird erst mit `v1.1.3` zugesichert,
-wenn die vollständige Stable-Matrix sowie Admin-, Reseller-, Kunden- und
-Mailuser-Ansichten erfolgreich geprüft wurden. Die Versionsdateien werden nicht
-ohne diesen Nachweis umbenannt.
+Die vollständige Laufzeitmatrix, Admin-, Reseller-, Kunden- und
+Mailuser-Ansichten sowie die visuellen Desktop-, Tablet- und Mobilprüfungen
+sind bestanden. Bis zum unveränderlichen Tag bleibt `release/v1.1.3` bewusst
+als Kandidatenbranch gekennzeichnet.
 
 ### Installation und Projektinformationen
 
@@ -127,17 +127,17 @@ and the same interaction patterns work on desktop, tablet and mobile.
 
 ### Current status and compatibility
 
-`v1.1.2` is a public test and evaluation release:
+`v1.1.3` is the fully validated release candidate:
 
-- ISPConfig 3.3 development line (`3.3dev`)
+- ISPConfig 3.3.1p1
 - PHP 8.1 or newer
 - Current desktop and mobile browsers
-- Not approved for production deployment
+- Ubuntu 22.04/24.04 and Debian 12/13 with Apache and Nginx validated
 
-Compatibility with ISPConfig 3.3.1p1 will be claimed only in `v1.1.3`, after
-the complete stable matrix and administrator, reseller, customer and mail-user
-views have passed validation. The version marker files will not be renamed
-without that evidence.
+The complete runtime matrix, administrator, reseller, customer and mail-user
+views, and the visual desktop, tablet and mobile checks have passed. Until the
+immutable tag is created, `release/v1.1.3` intentionally remains identified as
+a candidate branch.
 
 ### Installation and project information
 

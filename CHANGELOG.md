@@ -5,8 +5,11 @@
 - Added an explicit ISPConfig 3.3.1p1 compatibility candidate.
 - Verified real NEXT selection without fallback on a clean stable installation.
 - Added authenticated dashboard and referenced-asset runtime validation.
-- Kept public release approval blocked until the complete platform and role
-  matrix has passed.
+- Passed Ubuntu 22.04/24.04 and Debian 12/13 on Apache and Nginx.
+- Passed administrator, reseller, customer and mail-user boundaries.
+- Added current runtime screenshots and completed responsive visual validation.
+- Corrected standalone dashboard widgets, login localization, mobile controls
+  and retired XMPP presentation.
 
 ## 1.1.2 - 2026-07-30
 

@@ -451,6 +451,38 @@ body.wb-dashboard-page .wb-dashlet[data-wb-density='compact'] .modules { grid-te
   }
 }
 
+/* WP-1137: intentional secondary-content composition.
+ *
+ * News is useful context, not a narrow metric tile. Whenever it is the only
+ * remaining dashboard card it owns the available row; in a populated
+ * dashboard it still receives enough width for readable editorial copy.
+ */
+body.wb-dashboard-page #pageContent.wb-dashboard-layout > :is(
+  .wb-dashlet-news,
+  .wb-dashlet[data-wb-dashlet='news']
+) {
+  min-inline-size: min(100%, 320px);
+}
+
+body.wb-dashboard-page #pageContent.wb-dashboard-layout:has(> .wb-dashboard-empty-state) > :is(
+  .wb-dashlet-news,
+  .wb-dashlet[data-wb-dashlet='news']
+) {
+  grid-column: 1 / -1;
+  inline-size: 100%;
+  max-inline-size: none;
+}
+
+body.wb-dashboard-page #pageContent.wb-dashboard-layout:has(> .wb-dashboard-empty-state) > :is(
+  .wb-dashlet-news,
+  .wb-dashlet[data-wb-dashlet='news']
+) > ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  max-height: none;
+  gap: 0 18px;
+}
+
 html[data-wb-theme='dark'] body.wb-dashboard-page #pageContent.wb-dashboard-layout > .wb-dashlet,
 html[data-wb-theme='dark'] .wb-dashboard-overview__stat {
   border-color: color-mix(in srgb, var(--wb-dashlet-accent, var(--wb-action)) 14%, var(--wb-border));

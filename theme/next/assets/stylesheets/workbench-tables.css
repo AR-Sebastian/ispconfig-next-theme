@@ -1442,3 +1442,22 @@ html[data-wb-theme='dark'] body.wb-list-page #pageContent :where(.wb-residual-in
   color: var(--wb-text) !important;
   background-color: color-mix(in srgb, var(--wb-surface-muted) 88%, #fff 2%) !important;
 }
+
+/* WP-1137: compact terminal state.
+ *
+ * An empty result is a short, informative terminal state. It must not reserve
+ * the vertical space of a populated data set or push pagination below a large
+ * blank canvas.
+ */
+body.wb-list-page .wb-table-workspace--finalized .wb-empty-state--table {
+  min-height: clamp(118px, 13cqi, 168px);
+  padding-block: 20px;
+}
+
+body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport:has(.wb-table-empty-row) {
+  min-height: 0;
+}
+
+body.wb-list-page .wb-table-workspace--finalized > .wb-table-viewport:has(.wb-table-empty-row) .wb-data-table {
+  block-size: auto;
+}

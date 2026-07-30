@@ -8,6 +8,24 @@
 
 Install and verify the theme on a staging system first.
 
+## Managed installation from the repository
+
+The cloned repository includes one operator tool for installation, updates and
+safe rollback:
+
+```bash
+sudo ./scripts/manage-theme.sh status
+sudo ./scripts/manage-theme.sh install
+sudo ./scripts/manage-theme.sh rollback
+sudo ./scripts/manage-theme.sh uninstall
+```
+
+`install` validates the payload, prepares the new version in a temporary
+directory and only then replaces the installed theme. An existing version is
+kept below `/var/backups/ispconfig-themes`. `uninstall` also moves the theme to
+that recovery area instead of deleting it permanently. Use `--dry-run` to
+review every planned operation without writing changes.
+
 ## Installation
 
 1. Download `ispconfig-next-theme-1.2.4.tar.gz` from the GitHub release.
@@ -44,4 +62,6 @@ If the file does not exist yet, it must start with `<?php`. Do not edit the
 generated `config.inc.php`. To return to the ISPConfig default sign-in theme,
 remove the line from `config.inc.local.php` and clear the browser cache.
 
-Back up the existing directory before updating. To roll back, select the ISPConfig default theme first and then remove `themes/next`.
+For a manual update, back up the existing directory first. To return manually,
+select the ISPConfig default theme and then remove `themes/next`. When using the
+operator tool, `rollback` restores the newest managed backup.

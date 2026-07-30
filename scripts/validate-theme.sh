@@ -4,6 +4,10 @@ set -euo pipefail
 root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 theme="$root/theme/next"
 
+bash -n "$root/scripts/manage-theme.sh"
+bash -n "$root/scripts/test-manager.sh"
+"$root/scripts/test-manager.sh"
+
 required=(
   "$root/VERSION"
   "$root/LICENSE.md"

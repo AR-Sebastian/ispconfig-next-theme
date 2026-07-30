@@ -8,6 +8,25 @@
 
 Die Installation zunächst auf einem Testsystem durchführen.
 
+## Verwaltete Installation aus dem Repository
+
+Für Installation, Aktualisierung und eine sichere Rückkehr steht im geklonten
+Repository ein gemeinsames Verwaltungswerkzeug bereit:
+
+```bash
+sudo ./scripts/manage-theme.sh status
+sudo ./scripts/manage-theme.sh install
+sudo ./scripts/manage-theme.sh rollback
+sudo ./scripts/manage-theme.sh uninstall
+```
+
+`install` prüft den Theme-Inhalt, baut die neue Version zunächst in einem
+temporären Ordner auf und tauscht sie erst danach aus. Eine vorhandene Version
+wird unter `/var/backups/ispconfig-themes` gesichert. `uninstall` löscht das
+Theme nicht endgültig, sondern verschiebt es ebenfalls in diesen
+Rückkehrbereich. Mit `--dry-run` lassen sich alle geplanten Schritte vorab
+anzeigen.
+
 ## Installation
 
 1. `ispconfig-next-theme-1.2.4.tar.gz` aus dem GitHub-Release herunterladen.
@@ -46,4 +65,7 @@ die Zeile aus `config.inc.local.php` entfernen und den Browser-Cache leeren.
 
 ## Aktualisierung und Rückkehr
 
-Vor einer Aktualisierung den vorhandenen Ordner sichern. Für die Rückkehr zuerst das ISPConfig-Standardtheme auswählen und danach `themes/next` entfernen.
+Bei einer manuellen Aktualisierung den vorhandenen Ordner vorher sichern. Für
+die Rückkehr zuerst das ISPConfig-Standardtheme auswählen und danach
+`themes/next` entfernen. Bei Verwendung des Verwaltungswerkzeugs übernimmt
+`rollback` die Wiederherstellung der zuletzt gesicherten Version.
